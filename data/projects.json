@@ -1,0 +1,167 @@
+[
+    {
+    "id": 1,
+    "title": "HR Management Website for PT Transporindo Agung Sejahtera",
+    "category": "One Man Project",
+    "description": "As a developer, I built a comprehensive HR management website for PT Transporindo Agung Sejahtera. This system includes employee leave and permission management, as well as automated leave balance calculations. The website was developed using Next.js and Nest.js, with a cron job to recalculate leave balances daily.",
+    "longDescription": "The HR Management Website is designed to streamline employee leave and permission management. Built with Next.js for the frontend and Nest.js for the backend, this system provides an intuitive interface for employees to request leave or permissions, while HR can easily manage and approve these requests. The automated leave balance calculation feature ensures that employee balances are updated daily using a cron job, maintaining accuracy and efficiency. Other features include real-time notifications, leave status updates, and detailed reports for HR management. This project enhances both employee satisfaction and HR productivity.",
+    "role": "Full-Stack Developer",
+    "duration": "4 months",
+    "year": "2025",
+    "technologies": [
+      "Next.js",
+      "Nest.js",
+      "Cron Job",
+      "PostgreSQL",
+      "TypeScript",
+      "Docker"
+    ],
+    "features": [
+      "Employee leave and permission management",
+      "Automated leave balance calculation using cron jobs",
+      "Real-time notifications for leave requests and approvals",
+      "Daily recalculation of leave balance for each employee",
+      "User authentication and role-based access",
+      "HR dashboard with detailed leave reports"
+    ],
+    "challenges": [
+      "Ensuring accurate daily recalculation of leave balances",
+      "Implementing secure and efficient user authentication",
+      "Handling concurrent leave requests and ensuring system scalability"
+    ],
+    "images": [
+      "/image/fake-project.png",
+      "/image/fake-project.png"
+    ],
+    "githubLink": "https://github.com/yourusername/task-manager",
+    "detailLink": "/details/1"
+  },
+    {
+    "id": 2,
+    "title": "Company Profile Website Yonkav",
+    "category": "One Man Project",
+    "description": "I developed a modern and fully responsive company profile website using Next.js, implementing Server-Side Rendering (SSR) to enhance both performance and search engine visibility. This project was built entirely by me, covering the full development process from planning and design to deployment.",
+    "longDescription": "Yonkav Company Profile is a modern, SEO-optimized website built with Next.js. The project showcases the company's services, portfolio, and team members with elegant animations and smooth transitions. Leveraging SSR capabilities of Next.js, the website achieves excellent performance scores and provides optimal user experience across all devices.",
+    "role": "Full-Stack Developer",
+    "duration": "3 months",
+    "year": "2024",
+    "technologies": [
+      "Next.js",
+      "TypeScript",
+      "Prisma",
+      "PostgreSQL",
+      "Motion UI"
+    ],
+    "features": [
+      "Server-Side Rendering for optimal SEO",
+      "Dynamic content management system",
+      "Contact form with email notifications",
+      "Interactive portfolio showcase",
+      "Smooth page transitions and animations",
+      "Multi-language support"
+    ],
+    "challenges": [
+      "Implementing SSR while maintaining fast page loads",
+      "Creating custom CMS for easy content updates",
+      "Optimizing images and assets for performance"
+    ],
+    "images": [
+      "/image/yonkav/yonkav1.png",
+      "/image/yonkav/yonkav2.png"
+    ],
+    "githubLink": "https://github.com/yourusername/yonkav",
+    "liveLink": "https://yonkav.com",
+    "detailLink": "/details/2"
+  },
+  {
+    "id": 3,
+    "title": "Aplans Boster",
+    "category": "Featured Project",
+    "description": "As a Front-End Developer on Aplans Booster, I use React.js, React Query, Tailwind CSS, and TypeScript for dynamic user interfaces. Postman API aids backend communication, and GitHub ensures version control and collaboration transparency. My deep API understanding allows seamless feature integration.",
+    "longDescription": "Aplans Booster is a comprehensive web application designed to streamline business operations and enhance productivity. Built with modern technologies, this platform offers real-time data synchronization, intuitive user interfaces, and powerful analytics tools. The application features a robust state management system using Redux, optimized API calls with React Query, and a beautiful UI crafted with Tailwind CSS and Shadcn components.",
+    "role": "Front-End Developer",
+    "duration": "6 months",
+    "year": "2024",
+    "technologies": [
+      "React.JS(Vite)",
+      "Tailwind CSS",
+      "Redux",
+      "React Query",
+      "Laravel",
+      "Shadcn UI"
+    ],
+    "features": [
+      "Real-time data synchronization across multiple devices",
+      "Advanced analytics dashboard with customizable widgets",
+      "Responsive design optimized for mobile and desktop",
+      "Secure authentication and authorization system",
+      "RESTful API integration with Laravel backend",
+      "Optimistic UI updates for better user experience"
+    ],
+    "challenges": [
+      "Implementing efficient state management for complex data flows",
+      "Optimizing performance for large datasets",
+      "Creating reusable component library"
+    ],
+    "images": [
+      "/image/aplans/aplans1.png",
+      "/image/aplans/aplans2.png"
+    ],
+    "githubLink": "https://github.com/yourusername/aplans-booster",
+    "liveLink": "https://aplans-booster.vercel.app",
+    "detailLink": "/details/3"
+  },
+
+  {
+    "id": 4,
+    "title": "Stunting Detection & Child Growth Monitoring App",
+    "category": "Featured Project",
+    "description": "This mobile application is built using React Native to help mothers and healthcare workers detect early signs of stunting and monitor the growth of infants and toddlers. The app allows users to register their child’s profile, input anthropometric data (height, weight, and head circumference), and receive automated health analysis based on WHO Child Growth Standards. The system processes the data and provides clear insights into whether a child is categorized as Normal, At Risk of Stunting, or Stunted. Additionally, the app offers educational content and personalized recommendations to support optimal child growth.The application emphasizes a simple user interface, ease of data entry, and fast health analysis, making it accessible even to non-medical users.",
+    "technologies": [
+      "React Native",
+      "TypeScript",
+      "Redux",
+      "MongoDB",
+      "React Native Chart",
+      "Express.JS",
+      "MySQL",
+      "Expo"
+    ],
+    "images": [
+      "/image/mbayu/mbayu.png",
+      "/image/mbayu/mbayu2.png"
+    ],
+    "githubLink": "https://github.com/yourusername/social-media",
+    "detailLink": "/details/4"
+  },
+  {
+    "id": 5,
+    "title": "Featured Project",
+    "category": "Aplans Boster Verivali",
+    "description": "This mobile application is designed to streamline the verification and validation process for surveys conducted by the Department of Social Services (Dinsos) for citizens eligible to receive social assistance (bansos). The app allows employees of Dinsos to verify the survey results collected from citizens, ensuring that all data is accurate and meets the required criteria before the disbursement of social assistance.",
+    "technologies": [
+      "React.js",
+      "TypeScript",
+      "Redux Toolkit",
+      "React Beautiful DND",
+      "Firebase",
+      "Material-UI"
+    ],
+        "features": [
+      "User Authentication: Secure login for Dinsos employees to access the app and verify survey data.",
+      "Survey Data Entry and Review: A simple interface for employees to review citizen survey data and validate information related to eligibility for social assistance.",
+      "Real-Time Validation: The app checks the validity of the data in real time, flagging any discrepancies or missing information for further review.",
+      "Data Syncing: Automatic syncing with a cloud database (Firebase) to ensure that data is always up-to-date and accessible across devices.",
+      "Reporting and Notifications: Real-time notifications and reporting features to alert employees about issues in the validation process or updates in survey statuses."
+    ],
+    "images": [
+      "/image/verivali/verivali1.png",
+      "/image/verivali/verivali2.png",
+      "/image/verivali/verivali3.png",
+      "/image/verivali/verivali4.png"
+    ],
+    "githubLink": "https://github.com/yourusername/task-manager",
+    "detailLink": "/details/5"
+  }
+
+] 

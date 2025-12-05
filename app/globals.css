@@ -1,0 +1,299 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 274, 81%, 94%;
+    --foreground: 223, 65%, 15%;
+    --primary-linear-background: linear-gradient(
+      to right top,
+      #78a5bd,
+      #8fb6cd,
+      #a6c7dc,
+      #bdd8ec,
+      #ccdaee,
+      #d8ddee,
+      #eeeff6,
+      #eeeff6
+    );
+    --secondary-linear-background: linear-gradient(
+      to right bottom,
+      #78a5bd,
+      #8fb6cd,
+      #a6c7dc,
+      #bdd8ec,
+      #ccdaee,
+      #d8ddee,
+      #eeeff6,
+      #eeeff6
+    );
+    --risd-blue: hsla(239, 93%, 64%, 1);
+    --risd-blue-2: hsla(239, 94%, 66%, 1);
+    --neon-blue: hsla(239, 94%, 68%, 1);
+    --tropical-indigo: hsla(239, 93%, 76%, 1);
+    --periwinkle: hsla(239, 95%, 84%, 1);
+    --oxford-blue: hsla(241, 100%, 9%, 1);
+    --penn-blue: hsla(240, 93%, 11%, 1);
+    --penn-blue-2: hsla(240, 90%, 12%, 1);
+    --federal-blue: hsla(240, 89%, 14%, 1);
+    --federal-blue-2: hsla(240, 87%, 15%, 1);
+    --federal-blue-3: hsla(240, 87%, 15%, 1);
+    --phthalo-blue: #161785;
+    --card: 0 0% 100%;
+    --card-foreground: 223, 65%, 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 223, 65%, 15%;
+    --primary: 223, 65%, 15%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 223, 65%, 15%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 223, 65%, 15%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 223, 65%, 15%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+    --font-montserrat: "Montserrat", sans-serif;
+  }
+  .dark {
+    --background: 223, 65%, 15%;
+    --foreground: 0 0% 98%;
+    --primary-linear-background: linear-gradient(
+      to left bottom,
+      #0d1b3d,
+      #162344,
+      #1e2b4b,
+      #273353,
+      #2f3b5a,
+      #3d455a
+    );
+    --secondary-linear-background: linear-gradient(
+      170deg,
+      #01002c,
+      #000440,
+      #02025c,
+      #002b71
+    );
+    --secondarys-linear-background: linear-gradient(
+      170deg,
+      #01002c 0%,
+      #000440 25%,
+      #010141 30%,
+      #010141 30%,
+      #667de3 65%,
+      #13357d 75%,
+      #0f1568 90%,
+      #01002c 100%
+    );
+
+    --primarys-linear-background: linear-gradient(
+      170deg,
+      #253a93 0%,
+      #253a93 10%,
+      #0f1568 25%,
+      #01002c 35%,
+      #0b0951 45%,
+      #1a3285 50%,
+      #162a6d 65%,
+      #0d1b4a 75%,
+      #050a2e 90%,
+      #01002c 100%
+    );
+    --wprimary-linear-background: linear-gradient(
+      170deg,
+      #01002c 0%,
+      #0f1568 10%,
+      #13357d 25%,
+      #253a93 35%,
+      #1a3285 50%,
+      #162a6d 65%,
+      #0d1b4a 75%,
+      #050a2e 90%,
+      #01002c 100%
+    );
+    --card: 223, 65%, 15%;
+    --card-foreground: 0 0% 98%;
+    --popover: 223, 65%, 15%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 223, 65%, 15%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+  @property --border-angle {
+    inherits: false;
+    initial-value: 0deg;
+    syntax: "<angle>";
+  }
+
+  .animate-border {
+    animation: border 4s linear infinite;
+  }
+}
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .bg-primary-linear {
+    background: var(--primary-linear-background);
+  }
+
+  .bg-secondary-linear {
+    background: var(--secondary-linear-background);
+  }
+}
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply text-foreground;
+  }
+
+  @property --border-angle {
+    inherits: false;
+    initial-value: 0deg;
+    syntax: "<angle>";
+  }
+
+  .animate-border {
+    animation: border 4s linear infinite;
+  }
+}
+* {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: var(--font-montserrat);
+}
+.animate-border {
+  animation: border 4s linear infinite;
+}
+.link p {
+  position: relative;
+  text-decoration: none;
+  margin: 0;
+  padding: 5px;
+  color: var(--primary);
+}
+.link {
+  padding: 5px 30px;
+}
+.dark .link:focus {
+  background-color: rgba(
+    31,
+    61,
+    92,
+    0.5
+  ); /* 0.5 adalah tingkat opacity (50%) */
+  padding: 5px 30px;
+}
+@media (prefers-color-scheme: dark) {
+  .link:focus p {
+    color: white; /* Warna khusus untuk tema gelap */
+  }
+
+  .link p {
+    position: relative;
+    text-decoration: none;
+    margin: 0;
+    padding: 5px;
+    color: var(--primary);
+  }
+}
+.link p::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 3px;
+  background-color: #fff;
+  bottom: 0;
+  left: 0;
+  transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+    left 0.3s cubic-bezier(0.075, 0.82, 0.165, 1); /* Tambahkan transisi untuk lebar dan posisi left */
+}
+.link:focus {
+  background-color: rgba(
+    238,
+    239,
+    246,
+    0.5
+  ); /* 0.5 adalah tingkat opacity (50%) */
+  padding: 5px 30px;
+}
+.link:focus p {
+  color: var(--primary);
+}
+.link:hover p::before,
+.link:focus p::before {
+  /* Tambahkan gaya untuk tombol yang dihover atau difokuskan */
+  width: 100%;
+  left: 0; /* Tetapkan posisi left ke 0 saat tombol dihover atau difokuskan */
+  background-color: #a362ff;
+}
+
+.link p:focus::before {
+  /* Hilangkan garis bawah ke kanan saat tidak dihover atau difokuskan */
+  width: 0;
+  background-color: #1f0a59;
+  left: 100%; /* Pindahkan garis bawah ke kanan saat tidak dihover atau difokuskan */
+}
+.btn-contact {
+  background-color: hsl(223, 65%, 15%);
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-contact:hover {
+  color: white; /* Change text color on hover */
+}
+
+.btn-contact:hover .HiArrowLongRight {
+  color: white; /* Change icon color on hover */
+}
+
+.btn-contact:hover::before {
+  transform: scaleX(1);
+}
+
+.btn-contact::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #517aa4;
+  color: white; /* Initial color for the icon */
+  transform-origin: left;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease, color 0.3s ease; /* Add color transition */
+}
+.btn-contact p {
+  letter-spacing: 3px;
+}

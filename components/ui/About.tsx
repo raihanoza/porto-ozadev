@@ -210,9 +210,16 @@ const About = () => {
             {isExpanded ? "Close" : "Know More"}
           </button>
         </div>
-
-        <div className="lg:w-[35%] md:w-full w-full">
-          <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} />
+        <div className="w-full lg:w-[35%] flex items-center justify-center lg:justify-end z-10 lg:pr-8">
+          <div className="relative w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72">
+            <Image
+              src="/image/about.svg"
+              alt="Public SVG"
+              fill
+              sizes="(max-width: 768px) 160px, 288px"
+              className="object-contain"
+            />
+          </div>
         </div>
       </div>
 

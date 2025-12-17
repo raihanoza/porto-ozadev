@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { HiArrowLongRight } from "react-icons/hi2";
-import { motion } from "framer-motion";
 import { Label } from "./label";
 import { Input } from "./input";
 import { Button } from "./button";
@@ -77,37 +76,16 @@ const Contact = () => {
       id="contacts"
       className="dark:bg-navy-stack-bottom bg-lightblue-stack-top w-full min-h-full py-10 lg:px-20 px-6"
     >
-      <motion.p
-        className="lg:text-4xl text-2xl font-extrabold text-center text-primary"
-        initial={{ opacity: 0, y: -30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
+      <p className="lg:text-4xl text-2xl font-extrabold text-center text-primary">
         Send Me a Message!
-      </motion.p>
-      <motion.p
-        className="lg:text-xl text-base text-center text-primary mt-2"
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-      >
+      </p>
+      <p className="lg:text-xl text-base text-center text-primary mt-2">
         Got a question or proposal, or want to drink coffee together? Go ahead.
-      </motion.p>
-      <motion.form
-        onSubmit={handleSubmit}
-        className="flex items-center flex-col"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-      >
+      </p>
+      <form onSubmit={handleSubmit} className="flex items-center flex-col">
         {/* Status Message */}
         {submitStatus.type && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
+          <div
             className={`lg:w-[60%] w-full mb-4 p-4 rounded-lg ${
               submitStatus.type === "success"
                 ? "bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 border border-green-300 dark:border-green-700"
@@ -115,7 +93,7 @@ const Contact = () => {
             }`}
           >
             {submitStatus.message}
-          </motion.div>
+          </div>
         )}
 
         <div className="flex flex-row lg:w-[60%] w-full gap-8 mt-10">
@@ -168,7 +146,7 @@ const Contact = () => {
           </p>
           <HiArrowLongRight className="ml-2 z-10 lg:text-3xl text-2xl text-white" />
         </Button>
-      </motion.form>
+      </form>
     </div>
   );
 };

@@ -2,8 +2,6 @@ import React from "react";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import ScrollBaseAnimation from "./text-marquee";
 import {
   heroBgDark,
   heroBgLight,
@@ -12,10 +10,14 @@ import {
   heroBgDarkBlur,
   heroBgLightBlur,
 } from "@/public/image/optimized/image-imports";
+import bgDark from "@/public/image/HeroBg.webp";
+import bgLight from "@/public/image/HeroBgLight.webp";
 import { NeonGlowEffect, TypewriterEffect } from "./TextEffect";
 import RotatingText from "../RotatingText";
 import FuzzyText from "../FuzzyText";
 import ProfileCard from "../ProfileCard";
+import { motion } from "framer-motion";
+import ScrollBaseAnimation from "./text-marquee";
 const RotatingTextAny = RotatingText as any;
 function Hero() {
   const words2 = ["RAIHAN OZA", "SOFTWARE ENGINEER"];
@@ -33,7 +35,7 @@ function Hero() {
       >
         {/* Dark theme background */}
         <Image
-          src={heroBgDark}
+          src={bgDark}
           alt=""
           fill
           priority
@@ -46,7 +48,7 @@ function Hero() {
 
         {/* Light theme background */}
         <Image
-          src={heroBgLight}
+          src={bgLight}
           alt=""
           fill
           priority
@@ -60,19 +62,9 @@ function Hero() {
 
       {/* Content Container */}
       <div className="relative w-full h-[80%] px-5 flex mt-16 lg:flex-row lg:px-32 flex-col z-10 md:flex-row md:items-center">
-        <motion.div
-          className="lg:mt-0 lg:w-[50%] md:w-[50%] w-[100%] lg:h-full md:h-[40%] h-[60%] flex flex-col justify-center"
-          initial={{ opacity: 0, x: -100 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
+        <div className="lg:mt-0 lg:w-[50%] md:w-[50%] w-[100%] lg:h-full md:h-[40%] h-[60%] flex flex-col justify-center">
           {/* Heading with proper semantic HTML */}
-          <motion.div
-            className="flex lg:flex-row flex-col lg:gap-2"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-          >
+          <div className="flex lg:flex-row flex-col lg:gap-2">
             <h1 className="sr-only">
               Hello! I am Raihan Oza, Software Engineer
             </h1>
@@ -94,28 +86,19 @@ function Hero() {
               transition={{ type: "spring", damping: 30, stiffness: 400 }}
               rotationInterval={2000}
             />
-          </motion.div>
+          </div>
 
           {/* Main tagline */}
-          <motion.div
-            className="flex flex-wrap items-baseline"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-          >
+          <div className="flex flex-wrap items-baseline">
             <h2 className="text-primary font-bold lg:text-6xl md:text-2xl text-lg">
               Turning imagination into lines of{" "}
               <span className="text-lightpurple">Code</span> with my{" "}
               <span className="text-lightpurple">Ninja</span> way.
             </h2>
-          </motion.div>
+          </div>
 
           {/* CTA Button */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.8, ease: "easeOut" }}
-          >
+          <div>
             <Link
               href="#about"
               className="w-fit"
@@ -135,27 +118,12 @@ function Hero() {
                 />
               </Button>
             </Link>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* Hero Image */}
-        <motion.div
-          className="mt-10 lg:w-[50%] md:w-[50%] w-full lg:h-full h-[25%] flex items-center lg:justify-end justify-center md:justify-center"
-          initial={{ opacity: 0, x: 100, scale: 0.8 }}
-          animate={{ opacity: 1, x: 0, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-        >
-          <motion.div
-            animate={{
-              y: [0, -20, 0],
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="w-fit h-auto flex justify-center lg:justify-end"
-          >
+        <div className="mt-10 lg:w-[50%] md:w-[50%] w-full lg:h-full h-[25%] flex items-center lg:justify-end justify-center md:justify-center">
+          <div className="w-fit h-auto flex justify-center lg:justify-end">
             <ProfileCard
               name="Raihan Oza"
               title="Software Engineer"
@@ -168,24 +136,21 @@ function Hero() {
                 if (typeof window !== "undefined") {
                   const el = document.getElementById("contacts");
                   if (el) {
-                    el.scrollIntoView({ behavior: "smooth" });
+                    el.scrollIntoView({ behavior: "auto" });
                   } else {
                     window.location.hash = "#contacts";
                   }
                 }
               }}
             />
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
 
-      {/* Scrolling text banner */}
+      {/* Static text banner */}
       <motion.div
         className="absolute bottom-0 w-full h-[10%] bg-risd-alt-smooth-compat dark:bg-dark-risd-alt-smooth-compat flex items-center z-10"
         aria-hidden="true"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 1, ease: "easeOut" }}
       >
         <ScrollBaseAnimation
           baseVelocity={3}

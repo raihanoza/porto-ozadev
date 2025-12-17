@@ -18,13 +18,7 @@ const Footer = () => {
   }, [theme]);
 
   return (
-    <motion.div 
-      className="[background:linear-gradient(45deg,#edf2fb,#d7e3fc,#edf2fb)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.slate.600/.48)_80%,_theme(colors.indigo.500)_86%,_theme(colors.indigo.300)_90%,_theme(colors.indigo.500)_94%,_theme(colors.slate.600/.48))_border-box] dark:[background:linear-gradient(45deg,#11071F,theme(colors.slate.900)_50%,#11071F)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.slate.600/.48)_80%,_theme(colors.indigo.500)_86%,_theme(colors.indigo.300)_90%,_theme(colors.indigo.500)_94%,_theme(colors.slate.600/.48))_border-box] border border-transparent animate-border z-10 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] w-full min-h-full py-10 lg:px-20 px-6"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
-    >
+    <motion.div className="[background:linear-gradient(45deg,#edf2fb,#d7e3fc,#edf2fb)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.slate.600/.48)_80%,_theme(colors.indigo.500)_86%,_theme(colors.indigo.300)_90%,_theme(colors.indigo.500)_94%,_theme(colors.slate.600/.48))_border-box] dark:[background:linear-gradient(45deg,#11071F,theme(colors.slate.900)_50%,#11071F)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.slate.600/.48)_80%,_theme(colors.indigo.500)_86%,_theme(colors.indigo.300)_90%,_theme(colors.indigo.500)_94%,_theme(colors.slate.600/.48))_border-box] border border-transparent animate-border z-10 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] w-full min-h-full py-10 lg:px-20 px-6">
       <div className="flex flex-row lg:flex-nowrap md:flex-nowrap flex-wrap justify-between gap-4">
         <div className="text-primary flex flex-col lg:w-[30%] w-[65%] lg:text-base text-sm">
           <p>&#169; Raihan Oza Samudera Siregar | {currentYear}</p>

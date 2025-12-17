@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { AnimatedBeam, Circle } from "./beam";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import { motion } from "framer-motion";
 
 const Skills = () => {
   const { theme } = useTheme();
@@ -29,20 +28,10 @@ const Skills = () => {
       id="skills"
       className="dark:bg-navy-stack-bottom bg-lightblue-stack-bottom w-full min-h-full py-6 lg:px-20 px-6"
     >
-      <motion.p
-        className="lg:text-4xl text-3xl font-extrabold text-center text-primary my-6"
-        initial={{ opacity: 0, y: -30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
+      <p className="lg:text-4xl text-3xl font-extrabold text-center text-primary my-6">
         Skills
-      </motion.p>
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9, y: 50 }}
-        whileInView={{ opacity: 1, scale: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
+      </p>
+      <div
         className="[background:linear-gradient(135deg,#A1CCF7_0%,#B4D6F8_8%,#BBDAF9_20%,#C1DDFA_32%,#C7E0FA_44%,#CCE3FA_60%,#D1E6FA_74%,#D5E8FA_88%,#D9EAFA_100%)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.slate.600/.48)_80%,_theme(colors.indigo.500)_86%,_theme(colors.indigo.300)_90%,_theme(colors.indigo.500)_94%,_theme(colors.slate.600/.48))_border-box] dark:[background:linear-gradient(135deg,#2C2D63_0%,#2C2D63_8%,#2C2D63_20%,#333471_32%,#333471_44%,#333471_60%,#3C3D84_74%,#3C3D84_88%,#3C3D84_100%)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.slate.600/.48)_80%,_theme(colors.indigo.500)_86%,_theme(colors.indigo.300)_90%,_theme(colors.indigo.500)_94%,_theme(colors.slate.600/.48))_border-box] border border-transparent animate-border rounded-[80px] lg:rounded-[100px] flex w-full mx-auto items-center justify-center p-8 z-10 overflow-hidden
     lg:flex-row md:flex-row lg:p-10 flex-col-reverse my-10
     lg:w-[100%]
@@ -232,7 +221,7 @@ const Skills = () => {
           gradientStartColor="#48b0d9"
           gradientStopColor="#67aeff"
         />
-      </motion.div>
+      </div>
     </div>
   );
 };

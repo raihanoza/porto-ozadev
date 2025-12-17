@@ -1,11 +1,36 @@
 "use client";
-import React, { useId } from "react";
-import { useEffect, useState } from "react";
+import React, { useId, useState, useEffect, useMemo } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import type { Container, SingleOrMultiple } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim";
 import { cn } from "@/lib/utils";
 import { motion, useAnimation } from "framer-motion";
+
+// Performance detection
+function useIsLowEndDevice() {
+  const [isLowEnd, setIsLowEnd] = useState(true); // Default to low-end for SSR
+
+  useEffect(() => {
+    const checkDevice = () => {
+      const isMobile = window.innerWidth < 768;
+      const hardwareConcurrency = navigator.hardwareConcurrency || 4;
+      const deviceMemory = (navigator as any).deviceMemory || 4;
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      setIsLowEnd(
+        prefersReducedMotion ||
+          (isMobile && hardwareConcurrency <= 4) ||
+          deviceMemory <= 2
+      );
+    };
+
+    checkDevice();
+  }, []);
+
+  return isLowEnd;
+}
 
 type ParticlesProps = {
   id?: string;
@@ -18,6 +43,7 @@ type ParticlesProps = {
   particleColor?: string;
   particleDensity?: number;
 };
+
 export const SparklesCore = (props: ParticlesProps) => {
   const {
     id,
@@ -30,13 +56,22 @@ export const SparklesCore = (props: ParticlesProps) => {
     particleDensity,
   } = props;
   const [init, setInit] = useState(false);
+  const isLowEnd = useIsLowEndDevice();
+
   useEffect(() => {
+    // Don't initialize particles on low-end devices
+    if (isLowEnd) {
+      setInit(false);
+      return;
+    }
+
     initParticlesEngine(async (engine) => {
       await loadSlim(engine);
     }).then(() => {
       setInit(true);
     });
-  }, []);
+  }, [isLowEnd]);
+
   const controls = useAnimation();
 
   const particlesLoaded = async (container?: Container) => {
@@ -50,7 +85,19 @@ export const SparklesCore = (props: ParticlesProps) => {
     }
   };
 
+  // Optimized particle density based on device
+  const optimizedDensity = useMemo(() => {
+    if (isLowEnd) return 0;
+    return particleDensity ? Math.min(particleDensity, 80) : 80;
+  }, [isLowEnd, particleDensity]);
+
   const generatedId = useId();
+
+  // Return empty div for low-end devices
+  if (isLowEnd) {
+    return <div className={cn("opacity-0", className)} />;
+  }
+
   return (
     <motion.div animate={controls} className={cn("opacity-0", className)}>
       {init && (
@@ -68,12 +115,12 @@ export const SparklesCore = (props: ParticlesProps) => {
               enable: false,
               zIndex: 1,
             },
-
-            fpsLimit: 120,
+            // Optimized FPS limit
+            fpsLimit: 60,
             interactivity: {
               events: {
                 onClick: {
-                  enable: true,
+                  enable: false, // Disable click events for performance
                   mode: "push",
                 },
                 onHover: {
@@ -85,7 +132,7 @@ export const SparklesCore = (props: ParticlesProps) => {
               },
               modes: {
                 push: {
-                  quantity: 4,
+                  quantity: 2, // Reduced from 4
                 },
                 repulse: {
                   distance: 200,
@@ -231,7 +278,7 @@ export const SparklesCore = (props: ParticlesProps) => {
                   mode: "delete",
                   value: 0,
                 },
-                value: particleDensity || 120,
+                value: optimizedDensity, // Use optimized density
               },
               opacity: {
                 value: {

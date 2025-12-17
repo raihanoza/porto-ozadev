@@ -1,4 +1,10 @@
-import React, { useEffect, useRef, useCallback, useMemo } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useCallback,
+  useMemo,
+  useState,
+} from "react";
 import "./ProfileCard.css";
 
 interface ProfileCardProps {
@@ -46,6 +52,32 @@ const adjust = (
   tMax: number
 ): number => round(tMin + ((tMax - tMin) * (v - fMin)) / (fMax - fMin));
 
+// Performance optimization: detect if device is low-end
+function useIsLowEndDevice() {
+  const [isLowEnd, setIsLowEnd] = useState(false);
+
+  useEffect(() => {
+    const checkDevice = () => {
+      const isMobile = window.innerWidth < 768;
+      const hardwareConcurrency = navigator.hardwareConcurrency || 4;
+      const deviceMemory = (navigator as any).deviceMemory || 4;
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      setIsLowEnd(
+        prefersReducedMotion ||
+          (isMobile && hardwareConcurrency <= 4) ||
+          deviceMemory <= 2
+      );
+    };
+
+    checkDevice();
+  }, []);
+
+  return isLowEnd;
+}
+
 const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   avatarUrl = "<Placeholder for avatar URL>",
   iconUrl = "<Placeholder for icon URL>",
@@ -70,11 +102,15 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   const wrapRef = useRef<HTMLDivElement>(null);
   const shellRef = useRef<HTMLDivElement>(null);
 
+  // Performance optimization: disable tilt on low-end devices
+  const isLowEnd = useIsLowEndDevice();
+  const shouldEnableTilt = enableTilt && !isLowEnd;
+
   const enterTimerRef = useRef<number | null>(null);
   const leaveRafRef = useRef<number | null>(null);
 
   const tiltEngine = useMemo(() => {
-    if (!enableTilt) return null;
+    if (!shouldEnableTilt) return null;
 
     let rafId: number | null = null;
     let running = false;
@@ -273,7 +309,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   );
 
   useEffect(() => {
-    if (!enableTilt || !tiltEngine) return;
+    if (!shouldEnableTilt || !tiltEngine) return;
 
     const shell = shellRef.current;
     if (!shell) return;
@@ -327,7 +363,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
       shell.classList.remove("entering");
     };
   }, [
-    enableTilt,
+    shouldEnableTilt,
     enableMobileTilt,
     tiltEngine,
     handlePointerMove,

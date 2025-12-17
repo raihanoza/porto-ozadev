@@ -1,27 +1,34 @@
-import React from "react";
+import React, { memo } from "react";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import {
-  heroBgDark,
-  heroBgLight,
-  heroIcon,
   coffeeIcon,
   heroBgDarkBlur,
   heroBgLightBlur,
 } from "@/public/image/optimized/image-imports";
 import bgDark from "@/public/image/HeroBg.webp";
 import bgLight from "@/public/image/HeroBgLight.webp";
-import { NeonGlowEffect, TypewriterEffect } from "./TextEffect";
-import RotatingText from "../RotatingText";
-import FuzzyText from "../FuzzyText";
-import ProfileCard from "../ProfileCard";
-import { motion } from "framer-motion";
+import { NeonGlowEffect } from "./TextEffect";
+import dynamic from "next/dynamic";
 import ScrollBaseAnimation from "./text-marquee";
-const RotatingTextAny = RotatingText as any;
-function Hero() {
-  const words2 = ["RAIHAN OZA", "SOFTWARE ENGINEER"];
 
+// Lazy load heavy components
+const ProfileCard = dynamic(() => import("../ProfileCard"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-48 h-64 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-lg animate-pulse" />
+  ),
+});
+
+const RotatingText = dynamic(() => import("../RotatingText"), {
+  ssr: false,
+  loading: () => <span className="text-white font-bold">Raihan Oza</span>,
+});
+
+const RotatingTextAny = RotatingText as any;
+
+function Hero() {
   return (
     <section
       id="hero"
@@ -148,7 +155,7 @@ function Hero() {
       </div>
 
       {/* Static text banner */}
-      <motion.div
+      <div
         className="absolute bottom-0 w-full h-[10%] bg-risd-alt-smooth-compat dark:bg-dark-risd-alt-smooth-compat flex items-center z-10"
         aria-hidden="true"
       >
@@ -159,9 +166,9 @@ function Hero() {
         >
           FRONT END DEVELOPER
         </ScrollBaseAnimation>
-      </motion.div>
+      </div>
     </section>
   );
 }
 
-export default Hero;
+export default memo(Hero);

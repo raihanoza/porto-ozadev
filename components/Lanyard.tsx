@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, memo, Suspense } from "react";
 import { Canvas, extend, useFrame } from "@react-three/fiber";
 import {
   useGLTF,
@@ -40,7 +40,45 @@ interface LanyardProps {
   transparent?: boolean;
 }
 
-export default function Lanyard({
+// Check if device is low-end
+function useIsLowEndDevice() {
+  const [isLowEnd, setIsLowEnd] = useState(false);
+
+  useEffect(() => {
+    const checkDevice = () => {
+      const isMobile = window.innerWidth < 768;
+      const hardwareConcurrency = navigator.hardwareConcurrency || 4;
+      const deviceMemory = (navigator as any).deviceMemory || 4;
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      // Consider low-end if: mobile with low cores, low memory, or user prefers reduced motion
+      setIsLowEnd(
+        prefersReducedMotion ||
+          (isMobile && hardwareConcurrency <= 4) ||
+          deviceMemory <= 2
+      );
+    };
+
+    checkDevice();
+  }, []);
+
+  return isLowEnd;
+}
+
+// Fallback for low-end devices
+function LanyardFallback() {
+  return (
+    <div className="relative z-0 w-full h-[300px] md:h-[450px] lg:h-[500px] xl:h-[550px] flex justify-center items-center">
+      <div className="w-32 h-48 md:w-40 md:h-56 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-lg border border-white/10 backdrop-blur-sm flex items-center justify-center">
+        <span className="text-white/60 text-sm">ID Card</span>
+      </div>
+    </div>
+  );
+}
+
+function LanyardInner({
   position = [0, 0, 30],
   gravity = [0, -40, 0],
   fov = 20,
@@ -50,54 +88,77 @@ export default function Lanyard({
 
   useEffect(() => {
     const handleResize = (): void => setIsMobile(window.innerWidth < 768);
+    handleResize(); // Check immediately
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  // Optimized DPR based on device
+  const dpr = isMobile ? [1, 1] : [1, 1.5];
+
+  // Reduced physics timestep for better performance
+  const physicsTimeStep = isMobile ? 1 / 30 : 1 / 45;
 
   return (
     <div className="relative z-0 w-full h-[300px] md:h-[450px] lg:h-[500px] xl:h-[550px] flex justify-center items-center">
       <Canvas
         camera={{ position, fov }}
-        dpr={[1, isMobile ? 1.5 : 2]}
-        gl={{ alpha: transparent }}
-        onCreated={({ gl }) =>
-          gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)
-        }
+        dpr={dpr as [number, number]}
+        gl={{
+          alpha: transparent,
+          antialias: !isMobile, // Disable antialiasing on mobile
+          powerPreference: "high-performance",
+          stencil: false,
+          depth: true,
+        }}
+        frameloop="demand" // Only render when needed
+        onCreated={({ gl, invalidate }) => {
+          gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1);
+          // Start rendering
+          invalidate();
+        }}
       >
         <ambientLight intensity={Math.PI} />
-        <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
-          <Band isMobile={isMobile} />
-        </Physics>
-        <Environment blur={0.75}>
-          <Lightformer
-            intensity={2}
-            color="white"
-            position={[0, -1, 5]}
-            rotation={[0, 0, Math.PI / 3]}
-            scale={[100, 0.1, 1]}
-          />
-          <Lightformer
-            intensity={3}
-            color="white"
-            position={[-1, -1, 1]}
-            rotation={[0, 0, Math.PI / 3]}
-            scale={[100, 0.1, 1]}
-          />
-          <Lightformer
-            intensity={3}
-            color="white"
-            position={[1, 1, 1]}
-            rotation={[0, 0, Math.PI / 3]}
-            scale={[100, 0.1, 1]}
-          />
-          <Lightformer
-            intensity={10}
-            color="white"
-            position={[-10, 0, 14]}
-            rotation={[0, Math.PI / 2, Math.PI / 3]}
-            scale={[100, 10, 1]}
-          />
-        </Environment>
+        <Suspense fallback={null}>
+          <Physics gravity={gravity} timeStep={physicsTimeStep}>
+            <Band isMobile={isMobile} />
+          </Physics>
+          {/* Simplified environment for mobile */}
+          <Environment blur={0.75}>
+            <Lightformer
+              intensity={2}
+              color="white"
+              position={[0, -1, 5]}
+              rotation={[0, 0, Math.PI / 3]}
+              scale={[100, 0.1, 1]}
+            />
+            {!isMobile && (
+              <>
+                <Lightformer
+                  intensity={3}
+                  color="white"
+                  position={[-1, -1, 1]}
+                  rotation={[0, 0, Math.PI / 3]}
+                  scale={[100, 0.1, 1]}
+                />
+                <Lightformer
+                  intensity={3}
+                  color="white"
+                  position={[1, 1, 1]}
+                  rotation={[0, 0, Math.PI / 3]}
+                  scale={[100, 0.1, 1]}
+                />
+              </>
+            )}
+            <Lightformer
+              intensity={10}
+              color="white"
+              position={[-10, 0, 14]}
+              rotation={[0, Math.PI / 2, Math.PI / 3]}
+              scale={[100, 10, 1]}
+            />
+          </Environment>
+        </Suspense>
       </Canvas>
     </div>
   );
@@ -298,3 +359,17 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
     </>
   );
 }
+
+// Main export with low-end device fallback
+const Lanyard = memo(function Lanyard(props: LanyardProps) {
+  const isLowEnd = useIsLowEndDevice();
+
+  // Show fallback for low-end devices
+  if (isLowEnd) {
+    return <LanyardFallback />;
+  }
+
+  return <LanyardInner {...props} />;
+});
+
+export default Lanyard;

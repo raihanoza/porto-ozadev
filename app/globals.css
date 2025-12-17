@@ -2,6 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* GPU acceleration for smooth animations */
+.will-change-transform {
+  will-change: transform;
+}
+
+/* Optimize animations for mobile */
+@media (max-width: 768px) {
+  .animate-border {
+    animation-duration: 6s !important; /* Slower animation on mobile */
+  }
+  
+  .animate-float-icon,
+  .animate-twinkle,
+  .animate-shooting-star {
+    animation: none !important;
+  }
+}
+
 @layer base {
   :root {
     --background: 274, 81%, 94%;

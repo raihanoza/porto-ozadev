@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import Icons1 from "@/public/image/icon (1).png";
 import Icons2 from "@/public/image/icon (2).png";
@@ -9,57 +9,84 @@ import Icons3 from "@/public/image/icon (3).png";
 import Icons4 from "@/public/image/icon (4).png";
 import Icons5 from "@/public/image/icon (5).png";
 import Icons6 from "@/public/image/icon (6).png";
-import Lanyard from "../Lanyard";
+import dynamic from "next/dynamic";
+
+// Lazy load heavy 3D component
+const Lanyard = dynamic(() => import("../Lanyard"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-[300px] md:h-[450px] flex items-center justify-center">
+      <div className="w-32 h-48 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-lg animate-pulse" />
+    </div>
+  ),
+});
+
+// Check for reduced motion preference
+function usePrefersReducedMotion() {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(true); // Default to reduced for SSR
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handler = (event: MediaQueryListEvent) =>
+      setPrefersReducedMotion(event.matches);
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, []);
+
+  return prefersReducedMotion;
+}
 
 const About = () => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [stars, setStars] = useState<
-    {
-      left: number;
-      top: number;
-      animationDelay: number;
-      animationDuration: number;
-      opacity: number;
-    }[]
-  >([]);
-  const [shootingStars, setShootingStars] = useState<
-    {
-      left: number;
-      top: number;
-      animationDelay: number;
-      animationDuration: number;
-    }[]
-  >([]);
+  const [isMobile, setIsMobile] = useState(false);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
-    setStars(
-      [...Array(50)].map(() => ({
-        left: Math.random() * 100,
-        top: Math.random() * 100,
-        animationDelay: Math.random() * 3,
-        animationDuration: 2 + Math.random() * 3,
-        opacity: 0.3 + Math.random() * 0.7,
-      }))
-    );
-    setShootingStars(
-      [...Array(5)].map((_, i) => ({
-        left: 20 + Math.random() * 60,
-        top: -10 + Math.random() * 30,
-        animationDelay: i * 4 + Math.random() * 3,
-        animationDuration: 1.5 + Math.random() * 1,
-      }))
-    );
+    setIsMobile(window.innerWidth < 768);
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Tech icons dengan posisi yang sudah ditentukan
-  const techIcons = [
-    { src: Icons1, left: "5%", top: "10%" },
-    { src: Icons2, left: "15%", top: "75%" },
-    { src: Icons3, left: "85%", top: "15%" },
-    { src: Icons4, left: "90%", top: "70%" },
-    { src: Icons5, left: "10%", top: "45%" },
-    { src: Icons6, left: "88%", top: "45%" },
-  ];
+  // Memoize stars - reduced count for better performance
+  const stars = useMemo(() => {
+    // Reduce stars on mobile and when user prefers reduced motion
+    const starCount = prefersReducedMotion ? 0 : isMobile ? 15 : 25;
+    return [...Array(starCount)].map(() => ({
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      animationDelay: Math.random() * 3,
+      animationDuration: 2 + Math.random() * 3,
+      opacity: 0.3 + Math.random() * 0.7,
+    }));
+  }, [isMobile, prefersReducedMotion]);
+
+  // Memoize shooting stars - reduced for performance
+  const shootingStars = useMemo(() => {
+    // Disable shooting stars on mobile or reduced motion
+    if (prefersReducedMotion || isMobile) return [];
+    return [...Array(2)].map((_, i) => ({
+      left: 20 + Math.random() * 60,
+      top: -10 + Math.random() * 30,
+      animationDelay: i * 6 + Math.random() * 3,
+      animationDuration: 2 + Math.random() * 1,
+    }));
+  }, [isMobile, prefersReducedMotion]);
+
+  // Tech icons dengan posisi yang sudah ditentukan - only show on desktop
+  const techIcons = useMemo(() => {
+    if (isMobile || prefersReducedMotion) return []; // Hide on mobile for performance
+    return [
+      { src: Icons1, left: "5%", top: "10%" },
+      { src: Icons2, left: "15%", top: "75%" },
+      { src: Icons3, left: "85%", top: "15%" },
+      { src: Icons4, left: "90%", top: "70%" },
+      { src: Icons5, left: "10%", top: "45%" },
+      { src: Icons6, left: "88%", top: "45%" },
+    ];
+  }, [isMobile, prefersReducedMotion]);
 
   return (
     <div

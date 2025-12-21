@@ -24,7 +24,7 @@
   .animate-border {
     animation-duration: 6s !important; /* Slower animation on mobile */
   }
-  
+
   .animate-float-icon,
   .animate-twinkle,
   .animate-shooting-star {
@@ -183,6 +183,9 @@
   .animate-border {
     animation: border 4s linear infinite;
   }
+  .theme {
+    --animate-beam-move: beam-move 8s linear infinite;
+  }
 }
 @layer utilities {
   .text-balance {
@@ -326,4 +329,24 @@ body {
 }
 .btn-contact p {
   letter-spacing: 3px;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@theme inline {
+  @keyframes beam-move {
+  0% {
+    transform: translateX(0);
+    }
+  100% {
+    transform: translateX(100vw);
+    }
+  }
 }

@@ -24,10 +24,7 @@ const Skills = () => {
   const div8Ref = useRef<HTMLDivElement>(null);
   const div9Ref = useRef<HTMLDivElement>(null);
   return (
-    <div
-      id="skills"
-      className="dark:bg-navy-stack-bottom bg-lightblue-stack-bottom w-full min-h-full py-6 lg:px-20 px-6"
-    >
+    <div id="skills" className="w-full min-h-full py-6 lg:px-20 px-6">
       <p className="lg:text-4xl text-3xl font-extrabold text-center text-primary my-6">
         Skills
       </p>

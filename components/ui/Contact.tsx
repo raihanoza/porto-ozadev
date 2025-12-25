@@ -72,10 +72,7 @@ const Contact = () => {
   };
 
   return (
-    <div
-      id="contacts"
-      className="dark:bg-navy-stack-bottom bg-lightblue-stack-top w-full min-h-full py-10 lg:px-20 px-6"
-    >
+    <div id="contacts" className="w-full min-h-full py-10 lg:px-20 px-6">
       <p className="lg:text-4xl text-2xl font-extrabold text-center text-primary">
         Send Me a Message!
       </p>

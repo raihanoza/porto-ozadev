@@ -34,8 +34,8 @@
 
 @layer base {
   :root {
-    --background: 274, 81%, 94%;
-    --foreground: 223, 65%, 15%;
+    --background: 210, 17%, 98%;
+    --foreground: 223 65% 15%;
     --primary-linear-background: linear-gradient(
       to right top,
       #78a5bd,
@@ -96,7 +96,7 @@
     --font-montserrat: "Montserrat", sans-serif;
   }
   .dark {
-    --background: 223, 65%, 15%;
+    --background: 217, 95%, 8%;
     --foreground: 0 0% 98%;
     --primary-linear-background: linear-gradient(
       to left bottom,
@@ -204,7 +204,7 @@
     @apply border-border;
   }
   body {
-    @apply text-foreground;
+    @apply bg-background text-foreground;
   }
 
   @property --border-angle {
@@ -331,14 +331,6 @@ body {
   letter-spacing: 3px;
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
 
 @theme inline {
   @keyframes beam-move {

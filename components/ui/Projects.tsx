@@ -37,10 +37,7 @@ const Projects = () => {
   // Prevent hydration error by not rendering until mounted
   if (!mounted) {
     return (
-      <div
-        id="works"
-        className="dark:bg-navy-stack-top bg-lightblue-stack-bottom w-full min-h-full py-10 lg:px-20 px-6"
-      >
+      <div id="works" className="w-full min-h-full py-10 lg:px-20 px-6">
         <p className="lg:text-4xl text-3xl font-extrabold text-center text-primary">
           Recent Projects
         </p>
@@ -52,10 +49,7 @@ const Projects = () => {
   }
 
   return (
-    <div
-      id="works"
-      className="dark:bg-navy-stack-top bg-lightblue-stack-bottom w-full min-h-full py-10 lg:px-20 px-6"
-    >
+    <div id="works" className="w-full min-h-full py-10 lg:px-20 px-6">
       <p className="lg:text-4xl text-3xl font-extrabold text-center text-primary">
         Recent Projects
       </p>

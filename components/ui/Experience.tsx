@@ -4,10 +4,7 @@ import MarqueeExperience from "./MarqueeExperience";
 
 const Experience = () => {
   return (
-    <div
-      id="experiences"
-      className="dark:bg-navy-stack-back-smooth bg-lightblue-stack-top w-full min-h-full py-10"
-    >
+    <div id="experiences" className="w-full min-h-full py-10">
       <p className="lg:text-4xl text-2xl font-extrabold text-center text-primary mb-4">
         Professional Experience
       </p>

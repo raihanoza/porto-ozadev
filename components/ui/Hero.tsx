@@ -44,28 +44,7 @@ function Hero() {
               <h1 className="sr-only">
                 Hello! I am Raihan Oza, Software Engineer
               </h1>
-              <NeonGlowEffect
-                words="HELLO, I AM"
-                // words={words}
-                className="lg:text-2xl text-xl"
-                aria-hidden="true"
-              />
-              <RotatingTextAny
-                texts={[
-                  "Raihan Oza",
-                  "Fullstack Developer",
-                  "Mobile Developer",
-                ]}
-                mainClassName="md:px-3 text-white overflow-hidden rounded-lg font-bold text-lg sm:text-xl md:text-2xl"
-                staggerFrom={"last"}
-                initial={{ y: "100%" }}
-                animate={{ y: 0 }}
-                exit={{ y: "-120%" }}
-                staggerDuration={0.025}
-                splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
-                transition={{ type: "spring", damping: 30, stiffness: 400 }}
-                rotationInterval={2000}
-              />
+              <p>HALO</p>
             </div>
 
             {/* Main tagline */}

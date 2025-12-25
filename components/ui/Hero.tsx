@@ -40,8 +40,8 @@ function Hero() {
         color="#7B91D1"
         refresh
       />
-      <div className="flex flex-col w-full h-screen max-h-screen">
-        <div className="relative w-full h-[93%] lg:h-[90%] px-5 flex mt-16 lg:flex-row lg:px-32 flex-col z-10 md:flex-row md:items-center">
+      <div className="flex flex-col w-full h-full lg:h-[90%] max-h-screen">
+        <div className="relative w-full h-full lg:h-[90%] px-5 flex mt-16 lg:flex-row lg:px-32 flex-col z-10 md:flex-row md:items-center pb-20 lg:pb-0">
           <div className="lg:mt-0 lg:w-[50%] md:w-[50%] w-[100%] lg:h-full md:h-[40%] h-[50%] flex flex-col justify-center">
             {/* Heading with proper semantic HTML */}
             <div className="flex lg:flex-row flex-col lg:gap-2">
@@ -84,7 +84,7 @@ function Hero() {
           </div>
 
           {/* Hero Image */}
-          <div className="mt-10 lg:w-[50%] md:w-[50%] w-full lg:h-full h-[25%] flex items-center lg:justify-end justify-center md:justify-center">
+          <div className="mt-10 lg:w-[50%] md:w-[50%] w-full lg:h-full h-[50%] flex items-center lg:justify-end justify-center md:justify-center">
             <div className="w-fit h-auto flex justify-center lg:justify-end">
               <ProfileCard
                 name="Raihan Oza"
@@ -111,7 +111,7 @@ function Hero() {
 
         {/* Static text banner */}
         <div
-          className="absolute bottom-0 w-full lg:h-[10%] h-[7%] bg-risd-alt-smooth-compat dark:bg-dark-risd-alt-smooth-compat flex items-center z-10"
+          className="absolute bottom-16 lg:bottom-0 w-full lg:h-[10%] h-[7%] bg-risd-alt-smooth-compat dark:bg-dark-risd-alt-smooth-compat flex items-center z-20"
           aria-hidden="true"
         >
           <ScrollBaseAnimation

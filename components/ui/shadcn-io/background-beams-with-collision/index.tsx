@@ -1,7 +1,8 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useMemo } from "react";
+import Image from "next/image";
 
 export const BackgroundBeamsWithCollision = ({
   children,
@@ -13,58 +14,148 @@ export const BackgroundBeamsWithCollision = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const parentRef = useRef<HTMLDivElement>(null);
 
-  const beams = [
-    {
-      initialX: 10,
-      translateX: 10,
-      duration: 7,
-      repeatDelay: 3,
-      delay: 2,
-    },
-    {
-      initialX: 600,
-      translateX: 600,
-      duration: 3,
-      repeatDelay: 3,
-      delay: 4,
-    },
-    {
-      initialX: 100,
-      translateX: 100,
-      duration: 7,
-      repeatDelay: 7,
-      className: "h-6",
-    },
-    {
-      initialX: 400,
-      translateX: 400,
-      duration: 5,
-      repeatDelay: 14,
-      delay: 4,
-    },
-    {
-      initialX: 800,
-      translateX: 800,
-      duration: 11,
-      repeatDelay: 2,
-      className: "h-20",
-    },
-    {
-      initialX: 1000,
-      translateX: 1000,
-      duration: 4,
-      repeatDelay: 2,
-      className: "h-12",
-    },
-    {
-      initialX: 1200,
-      translateX: 1200,
-      duration: 6,
-      repeatDelay: 4,
-      delay: 2,
-      className: "h-6",
-    },
-  ];
+  // Performance optimization: detect low-end devices
+  const [isLowEnd, setIsLowEnd] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkDevice = () => {
+      const mobile = window.innerWidth < 768;
+      const hardwareConcurrency = navigator.hardwareConcurrency || 4;
+      const deviceMemory = (navigator as any).deviceMemory || 4;
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      setIsMobile(mobile);
+      setIsLowEnd(
+        prefersReducedMotion ||
+          mobile ||
+          hardwareConcurrency <= 4 ||
+          deviceMemory <= 4
+      );
+    };
+
+    checkDevice();
+    const handleResize = () => checkDevice();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Floating icons - optimized for performance
+  const floatingIcons = useMemo(() => {
+    if (isLowEnd) return []; // Disable on low-end devices
+
+    return [
+      {
+        src: "/image/react.png",
+        left: "8%",
+        top: "15%",
+        size: 50,
+        delay: 0,
+        duration: 12,
+      },
+      {
+        src: "/image/typescript.png",
+        left: "85%",
+        top: "20%",
+        size: 45,
+        delay: 1.5,
+        duration: 14,
+      },
+      {
+        src: "/image/next-dark.png",
+        left: "12%",
+        top: "70%",
+        size: 55,
+        delay: 3,
+        duration: 13,
+      },
+      {
+        src: "/image/tailwind.png",
+        left: "88%",
+        top: "65%",
+        size: 48,
+        delay: 2,
+        duration: 15,
+      },
+      {
+        src: "/image/nestjs.png",
+        left: "5%",
+        top: "45%",
+        size: 42,
+        delay: 2.5,
+        duration: 11,
+      },
+      {
+        src: "/image/postgres.png",
+        left: "92%",
+        top: "45%",
+        size: 46,
+        delay: 1,
+        duration: 13.5,
+      },
+    ];
+  }, [isLowEnd]);
+
+  // Optimize beams for low-end devices
+  const optimizedBeams = useMemo(() => {
+    const allBeams = [
+      {
+        initialX: 10,
+        translateX: 10,
+        duration: 7,
+        repeatDelay: 3,
+        delay: 2,
+      },
+      {
+        initialX: 600,
+        translateX: 600,
+        duration: 3,
+        repeatDelay: 3,
+        delay: 4,
+      },
+      {
+        initialX: 100,
+        translateX: 100,
+        duration: 7,
+        repeatDelay: 7,
+        className: "h-6",
+      },
+      {
+        initialX: 400,
+        translateX: 400,
+        duration: 5,
+        repeatDelay: 14,
+        delay: 4,
+      },
+      {
+        initialX: 800,
+        translateX: 800,
+        duration: 11,
+        repeatDelay: 2,
+        className: "h-20",
+      },
+      {
+        initialX: 1000,
+        translateX: 1000,
+        duration: 4,
+        repeatDelay: 2,
+        className: "h-12",
+      },
+      {
+        initialX: 1200,
+        translateX: 1200,
+        duration: 6,
+        repeatDelay: 4,
+        delay: 2,
+        className: "h-6",
+      },
+    ];
+
+    // Reduce beams on low-end devices (only show 4 beams instead of 7)
+    return isLowEnd ? allBeams.slice(0, 4) : allBeams;
+  }, [isLowEnd]);
 
   return (
     <div
@@ -74,7 +165,57 @@ export const BackgroundBeamsWithCollision = ({
         className
       )}
     >
-      {beams.map((beam) => (
+      {/* Floating Tech Icons */}
+      {floatingIcons.length > 0 && (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-[1]">
+          {floatingIcons.map((icon, i) => (
+            <motion.div
+              key={`float-icon-${i}`}
+              className="absolute opacity-20 dark:opacity-30"
+              style={{
+                left: icon.left,
+                top: icon.top,
+                willChange: "transform",
+              }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{
+                opacity: [0.15, 0.25, 0.15],
+                y: [0, -20, 0],
+                rotate: [-5, 5, -5],
+                scale: [1, 1.05, 1],
+              }}
+              transition={{
+                duration: icon.duration,
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "easeInOut",
+                delay: icon.delay,
+              }}
+            >
+              <Image
+                src={icon.src}
+                alt="tech icon"
+                width={icon.size}
+                height={icon.size}
+                loading="lazy"
+                className="select-none pointer-events-none"
+                style={{
+                  filter: "blur(0.5px)",
+                  imageRendering: "auto",
+                  backfaceVisibility: "hidden",
+                  transform: "translateZ(0)",
+                }}
+                onError={(e) => {
+                  const img = e.target as HTMLImageElement;
+                  img.style.display = "none";
+                }}
+              />
+            </motion.div>
+          ))}
+        </div>
+      )}
+
+      {optimizedBeams.map((beam) => (
         <CollisionMechanism
           key={beam.initialX + "beam-idx"}
           beamOptions={beam}

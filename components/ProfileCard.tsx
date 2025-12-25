@@ -65,14 +65,22 @@ function useIsLowEndDevice() {
         "(prefers-reduced-motion: reduce)"
       ).matches;
 
+      // More aggressive detection for better performance
       setIsLowEnd(
         prefersReducedMotion ||
-          (isMobile && hardwareConcurrency <= 4) ||
-          deviceMemory <= 2
+          isMobile ||
+          hardwareConcurrency <= 4 ||
+          deviceMemory <= 4
       );
     };
 
     checkDevice();
+
+    // Re-check on resize
+    const handleResize = () => checkDevice();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return isLowEnd;
@@ -106,8 +114,30 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   const isLowEnd = useIsLowEndDevice();
   const shouldEnableTilt = enableTilt && !isLowEnd;
 
+  // Image loading state to prevent flickering
+  const [avatarLoaded, setAvatarLoaded] = useState(false);
+  const [miniAvatarLoaded, setMiniAvatarLoaded] = useState(false);
+  const [avatarRetryCount, setAvatarRetryCount] = useState(0);
+  const [miniAvatarRetryCount, setMiniAvatarRetryCount] = useState(0);
+  const avatarRetryTimeoutRef = useRef<number | null>(null);
+  const miniAvatarRetryTimeoutRef = useRef<number | null>(null);
+
   const enterTimerRef = useRef<number | null>(null);
   const leaveRafRef = useRef<number | null>(null);
+
+  // Preload images on mount
+  useEffect(() => {
+    const preloadImage = (src: string) => {
+      if (!src || src.includes("Placeholder")) return;
+      const img = new Image();
+      img.src = src;
+    };
+
+    preloadImage(avatarUrl);
+    if (miniAvatarUrl) {
+      preloadImage(miniAvatarUrl);
+    }
+  }, [avatarUrl, miniAvatarUrl]);
 
   const tiltEngine = useMemo(() => {
     if (!shouldEnableTilt) return null;
@@ -121,8 +151,9 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     let targetX = 0;
     let targetY = 0;
 
-    const DEFAULT_TAU = 0.14;
-    const INITIAL_TAU = 0.6;
+    // Reduce animation smoothness on low-end devices for better performance
+    const DEFAULT_TAU = isLowEnd ? 0.08 : 0.14;
+    const INITIAL_TAU = isLowEnd ? 0.3 : 0.6;
     let initialUntil = 0;
 
     const setVarsFromXY = (x: number, y: number) => {
@@ -226,7 +257,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
         lastTs = 0;
       },
     };
-  }, [enableTilt]);
+  }, [shouldEnableTilt, isLowEnd]);
 
   const getOffsets = (evt: PointerEvent, el: HTMLElement) => {
     const rect = el.getBoundingClientRect();
@@ -376,17 +407,95 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     () =>
       ({
         "--icon": iconUrl ? `url(${iconUrl})` : "none",
-        "--grain": grainUrl ? `url(${grainUrl})` : "none",
+        "--grain": isLowEnd ? "none" : grainUrl ? `url(${grainUrl})` : "none", // Disable grain on low-end devices
         "--inner-gradient": innerGradient ?? DEFAULT_INNER_GRADIENT,
         "--behind-glow-color": behindGlowColor ?? "rgba(125, 190, 255, 0.67)",
         "--behind-glow-size": behindGlowSize ?? "50%",
       } as React.CSSProperties),
-    [iconUrl, grainUrl, innerGradient, behindGlowColor, behindGlowSize]
+    [
+      iconUrl,
+      grainUrl,
+      innerGradient,
+      behindGlowColor,
+      behindGlowSize,
+      isLowEnd,
+    ]
   );
 
   const handleContactClick = useCallback(() => {
     onContactClick?.();
   }, [onContactClick]);
+
+  // Cleanup timeouts on unmount
+  useEffect(() => {
+    return () => {
+      if (avatarRetryTimeoutRef.current) {
+        window.clearTimeout(avatarRetryTimeoutRef.current);
+      }
+      if (miniAvatarRetryTimeoutRef.current) {
+        window.clearTimeout(miniAvatarRetryTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  // Handle avatar load with retry logic
+  const handleAvatarError = useCallback(
+    (e: React.SyntheticEvent<HTMLImageElement>) => {
+      const img = e.target as HTMLImageElement;
+      console.error(
+        "Avatar failed to load:",
+        avatarUrl,
+        "Retry count:",
+        avatarRetryCount
+      );
+
+      if (avatarRetryCount < 3) {
+        // Retry loading after a delay
+        avatarRetryTimeoutRef.current = window.setTimeout(() => {
+          setAvatarRetryCount((prev) => prev + 1);
+          img.src = `${avatarUrl}?retry=${avatarRetryCount + 1}`;
+        }, 1000 * (avatarRetryCount + 1));
+      } else {
+        // Give up after 3 retries
+        img.style.opacity = "0.3";
+        img.style.filter = "grayscale(1)";
+        setAvatarLoaded(true);
+      }
+    },
+    [avatarUrl, avatarRetryCount]
+  );
+
+  // Handle mini avatar load with retry logic
+  const handleMiniAvatarError = useCallback(
+    (e: React.SyntheticEvent<HTMLImageElement>) => {
+      const img = e.target as HTMLImageElement;
+      const src = miniAvatarUrl || avatarUrl;
+      console.error(
+        "Mini avatar failed to load:",
+        src,
+        "Retry count:",
+        miniAvatarRetryCount
+      );
+
+      if (miniAvatarRetryCount < 2) {
+        // Retry loading
+        miniAvatarRetryTimeoutRef.current = window.setTimeout(() => {
+          setMiniAvatarRetryCount((prev) => prev + 1);
+          img.src = `${src}?retry=${miniAvatarRetryCount + 1}`;
+        }, 1000);
+      } else {
+        // Fallback to main avatar if mini avatar fails
+        if (miniAvatarUrl && img.src !== avatarUrl) {
+          img.src = avatarUrl;
+          setMiniAvatarRetryCount(0);
+        } else {
+          img.style.opacity = "0.5";
+          setMiniAvatarLoaded(true);
+        }
+      }
+    },
+    [miniAvatarUrl, avatarUrl, miniAvatarRetryCount]
+  );
 
   return (
     <div
@@ -394,22 +503,27 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
       className={`pc-card-wrapper ${className}`.trim()}
       style={cardStyle}
     >
-      {behindGlowEnabled && <div className="pc-behind" />}
+      {behindGlowEnabled && !isLowEnd && <div className="pc-behind" />}
       <div ref={shellRef} className="pc-card-shell">
         <section className="pc-card">
           <div className="pc-inside">
-            <div className="pc-shine" />
-            <div className="pc-glare" />
+            {!isLowEnd && <div className="pc-shine" />}
+            {!isLowEnd && <div className="pc-glare" />}
             <div className="pc-content pc-avatar-content">
               <img
                 className="avatar"
                 src={avatarUrl}
                 alt={`${name || "User"} avatar`}
-                loading="lazy"
-                onError={(e) => {
-                  const t = e.target as HTMLImageElement;
-                  t.style.display = "none";
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
+                style={{
+                  opacity: avatarLoaded ? 1 : 0,
+                  transition: "opacity 0.3s ease-in-out",
+                  willChange: isLowEnd ? "auto" : "opacity",
                 }}
+                onLoad={() => setAvatarLoaded(true)}
+                onError={handleAvatarError}
               />
               {showUserInfo && (
                 <div className="pc-user-info">
@@ -418,12 +532,16 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                       <img
                         src={miniAvatarUrl || avatarUrl}
                         alt={`${name || "User"} mini avatar`}
-                        loading="lazy"
-                        onError={(e) => {
-                          const t = e.target as HTMLImageElement;
-                          t.style.opacity = "0.5";
-                          t.src = avatarUrl;
+                        loading="eager"
+                        decoding="async"
+                        fetchPriority="low"
+                        style={{
+                          opacity: miniAvatarLoaded ? 1 : 0,
+                          transition: "opacity 0.3s ease-in-out",
+                          willChange: isLowEnd ? "auto" : "opacity",
                         }}
+                        onLoad={() => setMiniAvatarLoaded(true)}
+                        onError={handleMiniAvatarError}
                       />
                     </div>
                     <div className="pc-user-text">

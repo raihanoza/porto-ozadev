@@ -608,3 +608,44 @@
     border-radius: 50px;
   }
 }
+
+/* Performance optimizations for low-end devices and reduced motion */
+@media (prefers-reduced-motion: reduce), (max-width: 768px) {
+  .pc-behind {
+    filter: blur(30px) saturate(1) !important;
+    opacity: 0.5 !important;
+  }
+
+  .pc-shine,
+  .pc-glare {
+    animation: none !important;
+    opacity: 0.3 !important;
+  }
+
+  .pc-shine::before,
+  .pc-shine::after {
+    display: none !important;
+  }
+
+  .pc-card {
+    animation: none !important;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px -5px !important;
+  }
+
+  .pc-card:hover,
+  .pc-card.active {
+    transform: translateZ(0) rotateX(0deg) rotateY(0deg) !important;
+  }
+}
+
+/* Image optimization */
+.pc-avatar-content img {
+  image-rendering: auto;
+  will-change: auto;
+}
+
+@media (min-width: 769px) {
+  .pc-avatar-content img {
+    image-rendering: -webkit-optimize-contrast;
+  }
+}

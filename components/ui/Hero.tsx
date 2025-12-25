@@ -41,7 +41,7 @@ function Hero() {
         refresh
       />
       <div className="flex flex-col w-full h-screen">
-        <div className="relative w-full h-[93%] lg:h-[90%] px-5 flex mt-16 lg:flex-row lg:px-32 flex-col z-10 md:flex-row md:items-center">
+        <div className="relative w-full h-[93%] lg:h-[90%] px-5 flex lg:flex-row lg:px-32 flex-col z-10 md:flex-row md:items-center">
           <div className="lg:mt-0 lg:w-[50%] md:w-[50%] w-[100%] lg:h-full md:h-[40%] h-[50%] flex flex-col justify-center">
             {/* Heading with proper semantic HTML */}
             <div className="flex lg:flex-row flex-col lg:gap-2">

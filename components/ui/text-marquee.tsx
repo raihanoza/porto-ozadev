@@ -78,7 +78,7 @@ export default function ScrollBaseAnimation({
       >
         <span
           className={cn(
-            `block lg:text-[4vw] text-[6vw] md:text-[5vw]`,
+            `block lg:text-[4vw] text-[7vw] md:text-[5vw]`,
             clasname
           )}
         >
@@ -86,7 +86,7 @@ export default function ScrollBaseAnimation({
         </span>
         <span
           className={cn(
-            `block lg:text-[4vw] text-[6vw] md:text-[5vw]`,
+            `block lg:text-[4vw] text-[7vw] md:text-[5vw]`,
             clasname
           )}
         >
@@ -94,7 +94,7 @@ export default function ScrollBaseAnimation({
         </span>
         <span
           className={cn(
-            `block lg:text-[4vw] text-[6vw] md:text-[5vw]`,
+            `block lg:text-[4vw] text-[7vw] md:text-[5vw]`,
             clasname
           )}
         >
@@ -102,7 +102,7 @@ export default function ScrollBaseAnimation({
         </span>
         <span
           className={cn(
-            `block lg:text-[4vw] text-[6vw] md:text-[5vw]`,
+            `block lg:text-[4vw] text-[7vw] md:text-[5vw]`,
             clasname
           )}
         >

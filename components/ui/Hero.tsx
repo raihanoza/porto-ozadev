@@ -13,7 +13,7 @@ import { NeonGlowEffect } from "./TextEffect";
 import dynamic from "next/dynamic";
 import ScrollBaseAnimation from "./text-marquee";
 import { BackgroundBeamsWithCollision } from "./shadcn-io/background-beams-with-collision";
-
+import { BubbleBackground } from "./shadcn-io/bubble-background";
 // Lazy load heavy components
 const ProfileCard = dynamic(() => import("../ProfileCard"), {
   ssr: false,
@@ -36,23 +36,25 @@ function Hero() {
       aria-label="Hero section"
       className="h-screen max-h-screen"
     >
-      <BackgroundBeamsWithCollision className="h-[90%] max-h-screen">
+      <BubbleBackground
+        interactive={true}
+        className="lg:h-[90%] h-[93%] max-h-screen"
+      >
         <div className="relative w-full h-full px-5 flex mt-16 lg:flex-row lg:px-32 flex-col z-10 md:flex-row md:items-center">
-          <div className="lg:mt-0 lg:w-[50%] md:w-[50%] w-[100%] lg:h-full md:h-[40%] h-[60%] flex flex-col justify-center">
+          <div className="lg:mt-0 lg:w-[50%] md:w-[50%] w-[100%] lg:h-full md:h-[40%] h-[50%] flex flex-col justify-center">
             {/* Heading with proper semantic HTML */}
             <div className="flex lg:flex-row flex-col lg:gap-2">
               <h1 className="sr-only">
                 Hello! I am Raihan Oza, Software Engineer
               </h1>
-              <p>HALO</p>
             </div>
 
             {/* Main tagline */}
             <div className="flex flex-wrap items-baseline">
-              <h2 className="text-primary font-bold lg:text-6xl md:text-2xl text-lg">
+              <h2 className="text-primary font-bold lg:text-6xl md:text-2xl text-2xl">
                 Turning imagination into lines of{" "}
-                <span className="text-lightpurple">Code</span> with my{" "}
-                <span className="text-lightpurple">Ninja</span> way.
+                <span className="text-lightpurple">Code</span>,<br />
+                Powered by <span className="text-lightpurple">C☕️ffee</span>.
               </h2>
             </div>
 
@@ -105,11 +107,11 @@ function Hero() {
             </div>
           </div>
         </div>
-      </BackgroundBeamsWithCollision>
+      </BubbleBackground>
 
       {/* Static text banner */}
       <div
-        className="absolute bottom-0 w-full h-[10%] bg-risd-alt-smooth-compat dark:bg-dark-risd-alt-smooth-compat flex items-center z-10"
+        className="absolute bottom-0 w-full lg:h-[10%] h-[7%] bg-risd-alt-smooth-compat dark:bg-dark-risd-alt-smooth-compat flex items-center z-10"
         aria-hidden="true"
       >
         <ScrollBaseAnimation

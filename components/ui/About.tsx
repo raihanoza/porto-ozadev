@@ -11,16 +11,6 @@ import Icons5 from "@/public/image/icon (5).png";
 import Icons6 from "@/public/image/icon (6).png";
 import dynamic from "next/dynamic";
 
-// Lazy load heavy 3D component
-const Lanyard = dynamic(() => import("../Lanyard"), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-[300px] md:h-[450px] flex items-center justify-center">
-      <div className="w-32 h-48 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-lg animate-pulse" />
-    </div>
-  ),
-});
-
 // Check for reduced motion preference
 function usePrefersReducedMotion() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(true); // Default to reduced for SSR

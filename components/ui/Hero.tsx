@@ -63,7 +63,7 @@ function Hero() {
                       color="#7B91D1"
                       enableHover={true}
                       baseIntensity={0.18}
-                      hoverIntensity={0.5}
+                      hoverIntensity={0.01}
                     >
                       Code
                     </FuzzyText>

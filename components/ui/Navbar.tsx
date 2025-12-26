@@ -1,13 +1,48 @@
+"use client";
+
 import React from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 // Client-only interactive chunk (theme toggle, mobile menu, etc.)
 const NavbarClient = dynamic(() => import("./NavbarClient"), { ssr: false });
 
+// Helper function untuk smooth scroll
+const handleSmoothScroll = (
+  e: React.MouseEvent<HTMLAnchorElement>,
+  href: string,
+  pathname: string,
+  router: any
+) => {
+  const targetId = href.replace("/#", "");
+
+  // Jika tidak di homepage, navigate ke homepage dulu
+  if (pathname !== "/") {
+    router.push(href);
+    return;
+  }
+
+  // Jika di homepage, lakukan smooth scroll
+  e.preventDefault();
+  const element = document.getElementById(targetId);
+
+  if (element) {
+    element.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+    // Update URL without page reload
+    window.history.pushState({}, "", href);
+  }
+};
+
 export default function Navbar() {
+  const pathname = usePathname();
+  const router = useRouter();
+
   return (
     <nav
       className="fixed z-[999] w-full lg:px-20"
@@ -52,6 +87,9 @@ export default function Navbar() {
               <Link
                 role="menuitem"
                 href="/#hero"
+                onClick={(e) =>
+                  handleSmoothScroll(e, "/#hero", pathname, router)
+                }
                 className="font-bold uppercase text-primary"
               >
                 Home
@@ -61,6 +99,9 @@ export default function Navbar() {
               <Link
                 role="menuitem"
                 href="/#about"
+                onClick={(e) =>
+                  handleSmoothScroll(e, "/#about", pathname, router)
+                }
                 className="font-bold uppercase text-primary"
               >
                 About
@@ -70,6 +111,9 @@ export default function Navbar() {
               <Link
                 role="menuitem"
                 href="/#skills"
+                onClick={(e) =>
+                  handleSmoothScroll(e, "/#skills", pathname, router)
+                }
                 className="font-bold uppercase text-primary"
               >
                 Skills
@@ -79,6 +123,9 @@ export default function Navbar() {
               <Link
                 role="menuitem"
                 href="/#experiences"
+                onClick={(e) =>
+                  handleSmoothScroll(e, "/#experiences", pathname, router)
+                }
                 className="font-bold uppercase text-primary"
               >
                 Experiences
@@ -88,6 +135,9 @@ export default function Navbar() {
               <Link
                 role="menuitem"
                 href="/#works"
+                onClick={(e) =>
+                  handleSmoothScroll(e, "/#works", pathname, router)
+                }
                 className="font-bold uppercase text-primary"
               >
                 Works

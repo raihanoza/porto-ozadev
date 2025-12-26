@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import HandIcon from "../../lib/images/hand-with-fingers-splayed-2.svg";
@@ -9,10 +10,45 @@ import { Button } from "./button";
 import { Moon, Sun } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+// Helper function untuk smooth scroll
+const handleSmoothScroll = (
+  e: React.MouseEvent<HTMLAnchorElement>,
+  href: string,
+  pathname: string,
+  router: any,
+  closeMenu?: () => void
+) => {
+  const targetId = href.replace("/#", "");
+
+  // Jika tidak di homepage, navigate ke homepage dulu
+  if (pathname !== "/") {
+    router.push(href);
+    if (closeMenu) closeMenu();
+    return;
+  }
+
+  // Jika di homepage, lakukan smooth scroll
+  e.preventDefault();
+  const element = document.getElementById(targetId);
+
+  if (element) {
+    element.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+    // Update URL without page reload
+    window.history.pushState({}, "", href);
+    // Close menu if callback provided
+    if (closeMenu) closeMenu();
+  }
+};
+
 export default function NavbarClient() {
   const { theme, setTheme } = useTheme();
   const [currentTheme, setCurrentTheme] = useState<string>("dark");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     setCurrentTheme(theme ?? "dark");
@@ -36,7 +72,10 @@ export default function NavbarClient() {
 
   return (
     <div className="w-[20%] flex justify-end items-center gap-2">
-      <Link href="/#contacts">
+      <Link
+        href="/#contacts"
+        onClick={(e) => handleSmoothScroll(e, "/#contacts", pathname, router)}
+      >
         <Button className="bg-transparent border border-softpurple w-[100px] rounded-none px-1 flex flex-row items-center group">
           <p className="text-primary lg:text-sm md:text-xs text-xs">Say Hi!</p>
           <Image
@@ -103,7 +142,11 @@ export default function NavbarClient() {
             <div className="flex flex-col items-start justify-center h-full space-y-6 px-6">
               <Link
                 href="/#hero"
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={(e) =>
+                  handleSmoothScroll(e, "/#hero", pathname, router, () =>
+                    setMobileMenuOpen(false)
+                  )
+                }
                 className="border border-b-2 dark:border-gray-100 border-blue-950 w-full border-t-0 border-x-0 py-2"
               >
                 <p className="text-2xl font-bold uppercase text-primary">
@@ -112,7 +155,11 @@ export default function NavbarClient() {
               </Link>
               <Link
                 href="/#about"
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={(e) =>
+                  handleSmoothScroll(e, "/#about", pathname, router, () =>
+                    setMobileMenuOpen(false)
+                  )
+                }
                 className="border border-b-2 dark:border-gray-100 border-blue-950 w-full border-t-0 border-x-0 py-2"
               >
                 <p className="text-2xl font-bold uppercase text-primary">
@@ -121,7 +168,11 @@ export default function NavbarClient() {
               </Link>
               <Link
                 href="/#skills"
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={(e) =>
+                  handleSmoothScroll(e, "/#skills", pathname, router, () =>
+                    setMobileMenuOpen(false)
+                  )
+                }
                 className="border border-b-2 dark:border-gray-100 border-blue-950 w-full border-t-0 border-x-0 py-2"
               >
                 <p className="text-2xl font-bold uppercase text-primary">
@@ -130,7 +181,11 @@ export default function NavbarClient() {
               </Link>
               <Link
                 href="/#experiences"
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={(e) =>
+                  handleSmoothScroll(e, "/#experiences", pathname, router, () =>
+                    setMobileMenuOpen(false)
+                  )
+                }
                 className="border border-b-2 dark:border-gray-100 border-blue-950 w-full border-t-0 border-x-0 py-2"
               >
                 <p className="text-2xl font-bold uppercase text-primary">
@@ -139,7 +194,11 @@ export default function NavbarClient() {
               </Link>
               <Link
                 href="/#works"
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={(e) =>
+                  handleSmoothScroll(e, "/#works", pathname, router, () =>
+                    setMobileMenuOpen(false)
+                  )
+                }
                 className="border border-b-2 dark:border-gray-100 border-blue-950 w-full border-t-0 border-x-0 py-2"
               >
                 <p className="text-2xl font-bold uppercase text-primary">
@@ -148,7 +207,11 @@ export default function NavbarClient() {
               </Link>
               <Link
                 href="/#contacts"
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={(e) =>
+                  handleSmoothScroll(e, "/#contacts", pathname, router, () =>
+                    setMobileMenuOpen(false)
+                  )
+                }
                 className="border border-b-2 dark:border-gray-100 border-blue-950 w-full border-t-0 border-x-0 py-2"
               >
                 <p className="text-2xl font-bold uppercase text-primary">

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "../components/theme-provider";
+import CustomCursor from "../components/CustomCursor";
 
-// Configure Montserrat font with optimized settings
 const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-montserrat",
@@ -188,6 +188,7 @@ export default function RootLayout({
         <meta name="ICBM" content="3.5952, 98.6722" />
       </head>
       <body className={`${montserrat.variable} antialiased`}>
+        <CustomCursor />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

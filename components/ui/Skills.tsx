@@ -55,7 +55,7 @@ const Skills = () => {
       >
         <div className="flex h-full w-full flex-col items-stretch justify-between gap-10 relative z-10">
           <div className="flex flex-row items-center justify-between">
-            <Circle ref={div1Ref}>
+            <Circle ref={div1Ref} description="Next.js - React Framework">
               {currentTheme === "dark" ? (
                 <Image
                   src="/image/next-light.png"
@@ -72,7 +72,7 @@ const Skills = () => {
                 />
               )}
             </Circle>
-            <Circle ref={div5Ref} className="p-2">
+            <Circle ref={div5Ref} className="p-2" description="Tailwind CSS">
               <Image
                 src="/image/tailwind.png"
                 alt="react"
@@ -80,12 +80,20 @@ const Skills = () => {
                 height={50}
               />
             </Circle>
-            <Circle ref={div8Ref} className="p-2">
+            <Circle
+              ref={div8Ref}
+              className="p-2"
+              description="Sass - CSS Preprocessor"
+            >
               <Image src="/image/sass.png" alt="react" width={50} height={50} />
             </Circle>
           </div>
           <div className="flex flex-row items-center justify-between">
-            <Circle ref={div2Ref} className="p-2">
+            <Circle
+              ref={div2Ref}
+              className="p-2"
+              description="TypeScript - Type-Safe JavaScript"
+            >
               <Image
                 src="/image/typescript.png"
                 alt="react"
@@ -93,7 +101,7 @@ const Skills = () => {
                 height={50}
               />
             </Circle>
-            <Circle ref={div4Ref} className="p-2">
+            <Circle ref={div4Ref} className="p-2" description="Raihan Oza">
               {currentTheme === "dark" ? (
                 <Image
                   src="/image/logo.png"
@@ -110,7 +118,11 @@ const Skills = () => {
                 />
               )}
             </Circle>
-            <Circle ref={div6Ref} className="p-2">
+            <Circle
+              ref={div6Ref}
+              className="p-2"
+              description="Redux - State Management"
+            >
               <Image
                 src="/image/redux.png"
                 alt="react"
@@ -120,7 +132,7 @@ const Skills = () => {
             </Circle>
           </div>
           <div className="flex flex-row items-center justify-between">
-            <Circle ref={div3Ref} className="p-2">
+            <Circle ref={div3Ref} className="p-2" description="NestJS">
               <Image
                 src="/image/nestjs.png"
                 alt="react"
@@ -128,7 +140,7 @@ const Skills = () => {
                 height={50}
               />
             </Circle>
-            <Circle ref={div7Ref} className="p-2">
+            <Circle ref={div7Ref} className="p-2" description="React">
               <Image
                 src="/image/react.png"
                 alt="react"
@@ -136,7 +148,7 @@ const Skills = () => {
                 height={50}
               />
             </Circle>
-            <Circle ref={div9Ref} className="p-2">
+            <Circle ref={div9Ref} className="p-2" description="PostgreSQL">
               <Image
                 src="/image/postgres.png"
                 alt="react"

@@ -213,17 +213,39 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
 
 export const Circle = forwardRef<
   HTMLDivElement,
-  { className?: string; children?: React.ReactNode }
->(({ className, children }, ref) => {
+  { className?: string; children?: React.ReactNode; description?: string }
+>(({ className, children, description }, ref) => {
+  const [isFlipped, setIsFlipped] = useState(false);
+
   return (
     <div
       ref={ref}
       className={cn(
-        "object-contain [background:linear-gradient(45deg,#edf2fb,#d7e3fc,#edf2fb)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.slate.600/.48)_80%,_theme(colors.green.500)_86%,_theme(colors.indigo.800)_90%,_theme(colors.indigo.500)_94%,_theme(colors.slate.600/.48))_border-box] dark:[background:linear-gradient(45deg,#11071F,theme(colors.slate.900)_50%,#11071F)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.slate.600/.48)_80%,_theme(colors.indigo.500)_86%,_theme(colors.indigo.300)_90%,_theme(colors.indigo.500)_94%,_theme(colors.slate.600/.48))_border-box] border border-transparent animate-border z-10 flex h-20 w-40 items-center justify-center rounded-[35px] p-3 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] ",
+        "relative h-20 w-40 [perspective:1000px] cursor-pointer",
         className
       )}
+      onMouseEnter={() => setIsFlipped(true)}
+      onMouseLeave={() => setIsFlipped(false)}
+      data-cursor-hover
     >
-      {children}
+      <div
+        className={cn(
+          "relative w-full h-full transition-transform duration-500 [transform-style:preserve-3d]",
+          isFlipped && "[transform:rotateY(180deg)]"
+        )}
+      >
+        {/* Front side - Image */}
+        <div className="absolute inset-0 [backface-visibility:hidden] object-contain [background:linear-gradient(45deg,#edf2fb,#d7e3fc,#edf2fb)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.slate.600/.48)_80%,_theme(colors.green.500)_86%,_theme(colors.indigo.800)_90%,_theme(colors.indigo.500)_94%,_theme(colors.slate.600/.48))_border-box] dark:[background:linear-gradient(45deg,#11071F,theme(colors.slate.900)_50%,#11071F)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.slate.600/.48)_80%,_theme(colors.indigo.500)_86%,_theme(colors.indigo.300)_90%,_theme(colors.indigo.500)_94%,_theme(colors.slate.600/.48))_border-box] border border-transparent animate-border z-10 flex items-center justify-center rounded-[35px] p-3 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)]">
+          {children}
+        </div>
+
+        {/* Back side - Text */}
+        <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] object-contain [background:linear-gradient(45deg,#edf2fb,#d7e3fc,#edf2fb)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.slate.600/.48)_80%,_theme(colors.green.500)_86%,_theme(colors.indigo.800)_90%,_theme(colors.indigo.500)_94%,_theme(colors.slate.600/.48))_border-box] dark:[background:linear-gradient(45deg,#11071F,theme(colors.slate.900)_50%,#11071F)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.slate.600/.48)_80%,_theme(colors.indigo.500)_86%,_theme(colors.indigo.300)_90%,_theme(colors.indigo.500)_94%,_theme(colors.slate.600/.48))_border-box] border border-transparent animate-border z-10 flex items-center justify-center rounded-[35px] p-3 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)]">
+          <p className="text-primary font-bold text-xs text-center leading-tight">
+            {description || "Tech Stack"}
+          </p>
+        </div>
+      </div>
     </div>
   );
 });

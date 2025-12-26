@@ -23,7 +23,15 @@ export default function Navbar() {
         <div className="w-[20%]">
           <Link href="/" aria-label="Homepage">
             <Image
-              className="cursor-pointer transition-transform duration-300 ease-in-out hover:rotate-[-5deg]"
+              className="dark:hidden cursor-pointer transition-transform duration-300 ease-in-out hover:rotate-[-5deg]"
+              src="/image/logo_purple.png"
+              alt="Site logo"
+              width={100}
+              height={100}
+              priority
+            />
+            <Image
+              className="hidden dark:block cursor-pointer transition-transform duration-300 ease-in-out hover:rotate-[-5deg]"
               src="/image/logo.png"
               alt="Site logo"
               width={100}

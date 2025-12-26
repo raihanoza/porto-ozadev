@@ -34,7 +34,7 @@
 
 @layer base {
   :root {
-    --background: 210, 17%, 98%;
+    --background: 207, 100%, 96%;
     --foreground: 223 65% 15%;
     --primary-linear-background: linear-gradient(
       to right top,

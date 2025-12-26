@@ -89,11 +89,8 @@ const About = () => {
   }, [isMobile, prefersReducedMotion]);
 
   return (
-    <div
-      id="about"
-      className="w-full min-h-full py-6 lg:px-20 px-6 justify-center items-center flex flex-col relative overflow-hidden"
-    >
-      <div className="[background:linear-gradient(135deg,#A1CCF7_0%,#B4D6F8_8%,#BBDAF9_20%,#C1DDFA_32%,#C7E0FA_44%,#CCE3FA_60%,#D1E6FA_74%,#D5E8FA_88%,#D9EAFA_100%)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.slate.600/.48)_80%,_theme(colors.indigo.500)_86%,_theme(colors.indigo.300)_90%,_theme(colors.indigo.500)_94%,_theme(colors.slate.600/.48))_border-box] dark:[background:linear-gradient(135deg,#2C2D63_0%,#2C2D63_8%,#2C2D63_20%,#333471_32%,#333471_44%,#333471_60%,#3C3D84_74%,#3C3D84_88%,#3C3D84_100%)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.slate.600/.48)_80%,_theme(colors.indigo.500)_86%,_theme(colors.indigo.300)_90%,_theme(colors.indigo.500)_94%,_theme(colors.slate.600/.48))_border-box] border border-transparent animate-border z-10 items-center shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] rounded-[80px] lg:rounded-[100px] flex lg:flex-row flex-col-reverse justify-between lg:justify-between lg:items-start my-14 md:gap-4">
+    <div id="about" className="w-full min-h-full py-6 lg:px-20 px-6">
+      <div className="w-full max-w-full [background:linear-gradient(135deg,#A1CCF7_0%,#B4D6F8_8%,#BBDAF9_20%,#C1DDFA_32%,#C7E0FA_44%,#CCE3FA_60%,#D1E6FA_74%,#D5E8FA_88%,#D9EAFA_100%)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.slate.600/.48)_80%,_theme(colors.indigo.500)_86%,_theme(colors.indigo.300)_90%,_theme(colors.indigo.500)_94%,_theme(colors.slate.600/.48))_border-box] dark:[background:linear-gradient(135deg,#2C2D63_0%,#2C2D63_8%,#2C2D63_20%,#333471_32%,#333471_44%,#333471_60%,#3C3D84_74%,#3C3D84_88%,#3C3D84_100%)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.slate.600/.48)_80%,_theme(colors.indigo.500)_86%,_theme(colors.indigo.300)_90%,_theme(colors.indigo.500)_94%,_theme(colors.slate.600/.48))_border-box] border border-transparent animate-border z-10 items-center shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] rounded-[40px] md:rounded-[80px] lg:rounded-[100px] flex lg:flex-row flex-col-reverse justify-between lg:justify-between lg:items-start my-14 md:gap-4 overflow-hidden">
         <div className="lg:w-[65%] md:w-full flex items-start gap-2 lg:p-10 mb-10 lg:my-0 flex-col justify-start relative z-10 px-4">
           <p className="lg:text-4xl text-3xl font-extrabold text-center text-primary">
             ABOUT ME

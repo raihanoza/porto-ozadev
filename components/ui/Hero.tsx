@@ -14,6 +14,7 @@ import dynamic from "next/dynamic";
 import ScrollBaseAnimation from "./text-marquee";
 import { BackgroundBeamsWithCollision } from "./shadcn-io/background-beams-with-collision";
 import { Particles } from "./particles";
+import FuzzyText from "./shadcn-io/fuzzy-text";
 
 // Lazy load heavy components
 const ProfileCard = dynamic(() => import("../ProfileCard"), {
@@ -36,7 +37,7 @@ function Hero() {
         quantity={50}
         staticity={30}
         ease={50}
-        size={1}
+        size={2}
         color="#7B91D1"
         refresh
       />
@@ -52,10 +53,37 @@ function Hero() {
 
             {/* Main tagline */}
             <div className="flex flex-wrap items-baseline">
-              <h2 className="text-primary font-bold lg:text-6xl md:text-2xl text-2xl">
+              <h2 className="text-primary font-bold lg:text-5xl md:text-2xl text-2xl">
                 Turning imagination into lines of{" "}
-                <span className="text-lightpurple">Code</span>,<br />
-                Powered by <span className="text-lightpurple">C☕️ffee</span>.
+                <span className="inline-block">
+                  <span className="lg:hidden md:inline-block inline-block">
+                    <FuzzyText
+                      fontSize={24}
+                      fontWeight={900}
+                      color="#7B91D1"
+                      enableHover={true}
+                      baseIntensity={0.18}
+                      hoverIntensity={0.5}
+                    >
+                      Code
+                    </FuzzyText>
+                  </span>
+                  <span className="hidden lg:inline-block">
+                    <FuzzyText
+                      fontSize={60}
+                      fontWeight={900}
+                      color="#7B91D1"
+                      enableHover={true}
+                      baseIntensity={0.18}
+                      hoverIntensity={0.5}
+                    >
+                      Code
+                    </FuzzyText>
+                  </span>
+                </span>
+                ,<br />
+                <span className="text-lightpurple">C☕️ffee</span> into digital
+                m⭐️gic.
               </h2>
             </div>
 

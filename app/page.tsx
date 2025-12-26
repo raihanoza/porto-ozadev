@@ -15,7 +15,7 @@ export default function Home() {
     <>
       <StructuredData />
       <Navbar />
-      <main className="flex flex-col items-center">
+      <main className="w-full overflow-x-hidden">
         <Hero />
         <About />
         <Skills />

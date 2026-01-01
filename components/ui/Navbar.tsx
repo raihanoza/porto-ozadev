@@ -143,6 +143,15 @@ export default function Navbar() {
                 Works
               </Link>
             </li>
+            <li role="none">
+              <Link
+                role="menuitem"
+                href="/resume"
+                className="font-bold uppercase text-primary"
+              >
+                Resume
+              </Link>
+            </li>
           </ul>
         </div>
 

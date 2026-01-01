@@ -3,6 +3,7 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Icons1 from "@/public/image/icon (1).png";
 import Icons2 from "@/public/image/icon (2).png";
 import Icons3 from "@/public/image/icon (3).png";
@@ -87,11 +88,10 @@ const About = () => {
           </p>
 
           <p className="text-primary lg:text-lg text-sm lg:font-semibold drop-shadow-lg">
-            Hi, I'm Raihan Oza Samudera Siregar!👋🏼 I'm a versatile Frontend
-            Developer based in Medan, Indonesia, with about 2 years of hands-on
-            experience. My expertise lies in crafting, developing, and
-            efficiently managing complex websites, with a special focus on
-            React.js and Next.js technologies.
+            Hi, I'm Raihan Oza Samudera Siregar!👋🏼 I'm a versatile Fullstack
+            developer with about 2 years of hands-on experience. My expertise
+            lies in crafting, developing, and efficiently managing complex
+            websites, with a special focus on React.js and Next.js technologies.
           </p>
 
           {/* Desktop: Tampilkan semua text, Mobile: Gunakan expand/collapse */}
@@ -135,8 +135,29 @@ const About = () => {
             onClick={() => setIsExpanded(!isExpanded)}
             className="md:hidden my-1 bg-transparent text-blue-200 cursor-pointer font-semibold rounded-lg hover:bg-softpurple/10 transition-all duration-300 text-xs"
           >
-            {isExpanded ? "Close" : "Know More"}
+            {isExpanded ? "Close" : "Read More"}
           </button>
+
+          {/* Know More Button - Navigates to detail page */}
+          <Link
+            href="/about"
+            className="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-500 dark:to-blue-500 dark:text-white text-primary font-bold rounded-full hover:scale-105 hover:shadow-xl transition-all duration-300 group"
+          >
+            <span>Know More About Me</span>
+            <svg
+              className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
+            </svg>
+          </Link>
         </div>
         <div className="w-full lg:w-[35%] flex items-center justify-center lg:justify-end z-10 lg:pr-8">
           <div className="relative w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72">

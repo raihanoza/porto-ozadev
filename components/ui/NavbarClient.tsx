@@ -27,7 +27,7 @@ const handleSmoothScroll = (
     return;
   }
 
-  // Jika di homepage, lakukan smooth scroll
+  // Jika di homepageher, lakukan smooth scroll
   e.preventDefault();
   const element = document.getElementById(targetId);
 
@@ -203,6 +203,15 @@ export default function NavbarClient() {
               >
                 <p className="text-2xl font-bold uppercase text-primary">
                   Works
+                </p>
+              </Link>
+              <Link
+                href="/resume"
+                onClick={() => setMobileMenuOpen(false)}
+                className="border border-b-2 dark:border-gray-100 border-blue-950 w-full border-t-0 border-x-0 py-2"
+              >
+                <p className="text-2xl font-bold uppercase text-primary">
+                  Resume
                 </p>
               </Link>
               <Link

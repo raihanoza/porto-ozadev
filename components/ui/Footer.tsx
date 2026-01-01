@@ -26,10 +26,10 @@ const Footer = () => {
         </div>
         <div className="text-primary flex flex-col lg:w-[20%] w-[30%]">
           <p>
-            <Link href="#">My Resume</Link>
+            <Link href="/resume">My Resume</Link>
           </p>
           <p>
-            <Link href="#">My Work</Link>
+            <Link href="/#works">My Work</Link>
           </p>
         </div>
         <div className="flex items-center justify-center lg:w-[20%] w-[45%] mt-4">
@@ -54,13 +54,10 @@ const Footer = () => {
         <div className="flex flex-col items-end text-primary lg:w-[30%] w-[50%]">
           <p>Links</p>
           <div className="flex flex-row gap-2">
-            <Link href="https://github.com/raihanoza">
+            <Link href="https://github.com/raihanoza" target="_blank">
               <FaGithub className="text-3xl" />
             </Link>
-            <Link href="https://www.instagram.com/raihanoza_ss/">
-              <FaInstagram className="text-3xl" />
-            </Link>
-            <Link href="https://www.linkedin.com/in/raihanoza/">
+            <Link href="https://www.linkedin.com/in/raihanoza/" target="_blank">
               <FaLinkedin className="text-3xl" />
             </Link>
             <Link href="mailto:raihanoza18@gmail.com">

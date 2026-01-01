@@ -83,7 +83,7 @@ function Hero() {
                 </span>
                 ,<br />
                 <span className="text-lightpurple">C☕️ffee</span> into digital
-                m⭐️gic.
+                magic.
               </h2>
             </div>
 

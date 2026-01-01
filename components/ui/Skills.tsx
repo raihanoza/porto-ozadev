@@ -80,20 +80,12 @@ const Skills = () => {
                 height={50}
               />
             </Circle>
-            <Circle
-              ref={div8Ref}
-              className="p-2"
-              description="Sass - CSS Preprocessor"
-            >
+            <Circle ref={div8Ref} className="p-2" description="Sass">
               <Image src="/image/sass.png" alt="react" width={50} height={50} />
             </Circle>
           </div>
           <div className="flex flex-row items-center justify-between">
-            <Circle
-              ref={div2Ref}
-              className="p-2"
-              description="TypeScript - Type-Safe JavaScript"
-            >
+            <Circle ref={div2Ref} className="p-2" description="TypeScript">
               <Image
                 src="/image/typescript.png"
                 alt="react"
@@ -118,11 +110,7 @@ const Skills = () => {
                 />
               )}
             </Circle>
-            <Circle
-              ref={div6Ref}
-              className="p-2"
-              description="Redux - State Management"
-            >
+            <Circle ref={div6Ref} className="p-2" description="Redux">
               <Image
                 src="/image/redux.png"
                 alt="react"

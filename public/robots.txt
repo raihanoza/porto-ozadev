@@ -1,9 +1,37 @@
-# Allow all crawlers
+# robots.txt for raihanoza-dev.me
+
+# Allow all crawlers full access
 User-agent: *
 Allow: /
 
-# Disallow admin or private pages (if any)
-Disallow: /api/
+# Special instructions for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
 
-# Sitemap location
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+# Disallow sensitive areas
+Disallow: /api/
+Disallow: /_next/static/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.pdf$
+
+# Allow specific important files
+Allow: /cv.pdf
+Allow: /image/
+Allow: /favicon.ico
+Allow: /sitemap.xml
+
+# Sitemap locations
 Sitemap: https://raihanoza-dev.me/sitemap.xml
+
+# Additional directives for SEO
+Host: raihanoza-dev.me

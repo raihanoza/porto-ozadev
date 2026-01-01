@@ -1,7 +1,7 @@
 import Script from "next/script";
 
 export function StructuredData() {
-  // Person Schema
+  // Enhanced Person Schema
   const personJsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -10,43 +10,64 @@ export function StructuredData() {
     alternateName: "Raihan Oza",
     jobTitle: "Software Engineer & Full Stack Developer",
     description:
-      "Passionate Software Engineer and Full Stack Developer with 2+ years of experience specializing in React.js, Next.js, TypeScript, and modern web technologies",
+      "Expert Software Engineer and Full Stack Developer with 2+ years of experience specializing in React.js, Next.js, TypeScript, Node.js, and modern web technologies. Based in Medan, Indonesia, available for freelance projects worldwide.",
     url: "https://raihanoza-dev.me",
     image: {
       "@type": "ImageObject",
-      url: "https://raihanoza-dev.me/image/me7.png",
-      width: 800,
-      height: 800,
+      url: "https://raihanoza-dev.me/image/me2.png",
+      width: 512,
+      height: 512,
     },
-    email: "raihanoza18@gmail.com", // Ganti dengan email Anda
-    telephone: "+62-812-6277-7801", // Ganti dengan nomor Anda (opsional)
+    email: "raihanoza18@gmail.com",
+    telephone: "+62896-5216-4724",
     sameAs: [
       "https://github.com/raihanoza",
       "https://linkedin.com/in/raihanoza",
       "https://twitter.com/raihanoza",
+      "https://instagram.com/raihanoza",
     ],
     alumniOf: {
       "@type": "Organization",
-      name: "University/Institution Name", // Sesuaikan dengan pendidikan Anda
+      name: "Muhammadiyah University Of North Sumatera",
+      location: "Medan, Indonesia",
     },
     knowsAbout: [
       "Software Engineering",
       "Full Stack Development",
       "Frontend Development",
       "Backend Development",
-      "React.js",
-      "Next.js",
-      "TypeScript",
-      "JavaScript",
-      "Node.js",
-      "Nest.js",
+      "React.js Development",
+      "Next.js Development",
+      "TypeScript Programming",
+      "JavaScript Programming",
+      "Node.js Development",
+      "Express.js",
       "React Native",
-      "Web Development",
-      "Mobile Development",
-      "REST API",
+      "Mobile App Development",
+      "Web Application Development",
+      "RESTful API Development",
       "Database Design",
+      "PostgreSQL",
+      "MongoDB",
+      "Laravel Framework",
+      "PHP Development",
+      "UI/UX Implementation",
+      "Responsive Web Design",
+      "Performance Optimization",
+      "SEO Optimization",
     ],
-    knowsLanguage: ["English", "Indonesian"],
+    knowsLanguage: [
+      {
+        "@type": "Language",
+        name: "English",
+        proficiency: "Professional Working Proficiency",
+      },
+      {
+        "@type": "Language",
+        name: "Indonesian",
+        proficiency: "Native",
+      },
+    ],
     workLocation: {
       "@type": "Place",
       address: {

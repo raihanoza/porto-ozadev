@@ -1,9 +1,8 @@
-/* eslint-disable react/no-unescaped-entities */
 "use client";
 
+/* eslint-disable react/no-unescaped-entities */
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {
   ArrowLeft,
   Download,
@@ -16,10 +15,13 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 export default function ResumePage() {
   const handlePrint = () => {
-    window.print();
+    if (typeof window !== "undefined") {
+      window.print();
+    }
   };
 
   return (
@@ -35,13 +37,15 @@ export default function ResumePage() {
             <div className="lg:w-1/3 text-gray-900 dark:text-white p-8">
               {/* Profile Section */}
               <div className="text-center mb-8">
-                <div className="w-32 h-32 dark:bg-white/20 bg-gray-400 rounded-full mx-auto mb-4 flex items-center justify-center overflow-hidden">
-                  <Image
-                    src="/image/me3.png"
+                <div className="w-32 h-32 bg-white/20 rounded-full mx-auto mb-4 flex items-center justify-center overflow-hidden">
+                  <OptimizedImage
+                    src="/image/me2.png"
                     alt="Raihan Oza Samudera Siregar"
                     width={128}
                     height={128}
                     className="w-full h-full object-cover rounded-full"
+                    priority={true}
+                    quality={90}
                   />
                 </div>
                 <h1 className="text-xl font-bold mb-2">RAIHAN OZA</h1>

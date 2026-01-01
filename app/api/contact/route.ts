@@ -22,21 +22,52 @@ export async function POST(request: Request) {
       );
     }
 
-    // Konfigurasi transporter menggunakan Gmail
-    // PENTING: Anda perlu membuat App Password di Google Account
-    // https://myaccount.google.com/apppasswords
+    // Validasi environment variables
+    if (
+      !process.env.NEXT_PUBLIC_EMAIL_USER ||
+      !process.env.NEXT_PUBLIC_EMAIL_PASSWORD
+    ) {
+      console.error(
+        "Missing NEXT_PUBLIC_EMAIL_USER or NEXT_PUBLIC_EMAIL_PASSWORD environment variables"
+      );
+      return NextResponse.json(
+        { error: "Email service not configured" },
+        { status: 500 }
+      );
+    }
+
+    // Log untuk debugging (jangan log password)
+    console.log("Email service starting...");
+    console.log(
+      "NEXT_PUBLIC_EMAIL_USER configured:",
+      !!process.env.NEXT_PUBLIC_EMAIL_USER
+    );
+
+    // Konfigurasi transporter dengan timeout dan error handling
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      service: "Gmail",
       auth: {
-        user: process.env.EMAIL_USER, // Email Anda
-        pass: process.env.EMAIL_PASSWORD, // App Password dari Google
+        user: process.env.NEXT_PUBLIC_EMAIL_USER,
+        pass: process.env.NEXT_PUBLIC_EMAIL_PASSWORD,
       },
     });
 
+    // Verify transporter configuration
+    try {
+      await transporter.verify();
+      console.log("SMTP connection verified successfully");
+    } catch (verifyError) {
+      console.error("SMTP verification failed:", verifyError);
+      return NextResponse.json(
+        { error: "Email service configuration error" },
+        { status: 500 }
+      );
+    }
+
     // Email untuk Anda (pemilik website)
     const mailOptionsToOwner = {
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER, // Email Anda yang akan menerima pesan
+      from: process.env.NEXT_PUBLIC_EMAIL_USER,
+      to: process.env.NEXT_PUBLIC_EMAIL_USER, // Email Anda yang akan menerima pesan
       subject: `New Contact Form Submission from ${name}`,
       html: `
         <!DOCTYPE html>
@@ -167,7 +198,7 @@ export async function POST(request: Request) {
 
     // Email konfirmasi untuk pengirim (optional)
     const mailOptionsToSender = {
-      from: process.env.EMAIL_USER,
+      from: process.env.NEXT_PUBLIC_EMAIL_USER,
       to: email,
       subject: "Thanks for reaching out! 🚀",
       html: `
@@ -318,20 +349,68 @@ export async function POST(request: Request) {
       `,
     };
 
-    // Kirim email ke owner
-    await transporter.sendMail(mailOptionsToOwner);
+    console.log("Starting email sending process...");
 
-    // Kirim email konfirmasi ke sender
-    await transporter.sendMail(mailOptionsToSender);
+    try {
+      // Kirim email ke owner
+      console.log("Sending email to owner...");
+      const ownerResult = await transporter.sendMail(mailOptionsToOwner);
+      console.log("Owner email sent successfully:", ownerResult.messageId);
 
-    return NextResponse.json(
-      { message: "Email sent successfully!" },
-      { status: 200 }
-    );
+      // Kirim email konfirmasi ke sender
+      console.log("Sending confirmation email to sender...");
+      const senderResult = await transporter.sendMail(mailOptionsToSender);
+      console.log("Sender email sent successfully:", senderResult.messageId);
+
+      return NextResponse.json(
+        {
+          message: "Email sent successfully!",
+          messageId: ownerResult.messageId,
+        },
+        { status: 200 }
+      );
+    } catch (emailError) {
+      console.error("Email sending failed:", emailError);
+
+      // More specific error messages
+      let errorMessage = "Failed to send email. Please try again.";
+
+      if (emailError instanceof Error) {
+        if (emailError.message.includes("Invalid login")) {
+          errorMessage = "Email service authentication failed";
+        } else if (emailError.message.includes("timeout")) {
+          errorMessage = "Email service timeout. Please try again.";
+        } else if (emailError.message.includes("ECONNREFUSED")) {
+          errorMessage = "Unable to connect to email service";
+        }
+      }
+
+      return NextResponse.json(
+        {
+          error: errorMessage,
+          details:
+            process.env.NODE_ENV === "development"
+              ? emailError instanceof Error
+                ? emailError.message
+                : String(emailError)
+              : undefined,
+        },
+        { status: 500 }
+      );
+    }
   } catch (error) {
-    console.error("Error sending email:", error);
+    console.error("General error in contact API:", error);
+
     return NextResponse.json(
-      { error: "Failed to send email. Please try again." },
+      {
+        error: "Internal server error",
+        details:
+          process.env.NODE_ENV === "development"
+            ? error instanceof Error
+              ? error.message
+              : String(error)
+            : undefined,
+      },
       { status: 500 }
     );
   }

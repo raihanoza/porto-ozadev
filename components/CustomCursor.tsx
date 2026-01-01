@@ -7,8 +7,36 @@ export default function CustomCursor() {
   const [delayedPosition, setDelayedPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  // Check if device is desktop (not mobile/tablet)
+  useEffect(() => {
+    const checkIsDesktop = () => {
+      // Check for touch capability and screen size
+      const hasTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+      const isLargeScreen = window.innerWidth >= 1024; // 1024px = lg breakpoint in Tailwind
+      const hasCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
+
+      // Desktop: no touch OR (large screen AND fine pointer)
+      const desktop = !hasTouch || (isLargeScreen && !hasCoarsePointer);
+      setIsDesktop(desktop);
+    };
+
+    // Initial check
+    checkIsDesktop();
+
+    // Listen for resize events to recheck
+    window.addEventListener("resize", checkIsDesktop);
+
+    return () => {
+      window.removeEventListener("resize", checkIsDesktop);
+    };
+  }, []);
 
   useEffect(() => {
+    // Only run cursor logic on desktop devices
+    if (!isDesktop) return;
+
     const updateCursor = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
       if (!isVisible) setIsVisible(true);
@@ -42,10 +70,13 @@ export default function CustomCursor() {
         el.removeEventListener("mouseleave", handleMouseLeave);
       });
     };
-  }, [isVisible]);
+  }, [isVisible, isDesktop]);
 
   // Smooth delayed position using lerp (linear interpolation)
   useEffect(() => {
+    // Only run animation on desktop devices
+    if (!isDesktop) return;
+
     const lerp = (start: number, end: number, factor: number) => {
       return start + (end - start) * factor;
     };
@@ -68,7 +99,12 @@ export default function CustomCursor() {
         cancelAnimationFrame(animationFrameId);
       }
     };
-  }, [position]);
+  }, [position, isDesktop]);
+
+  // Don't render cursor on mobile/tablet devices
+  if (!isDesktop) {
+    return null;
+  }
 
   return (
     <>

@@ -28,17 +28,6 @@ export default function ResumePage() {
       <Navbar />
 
       <div className="py-20 lg:px-20 px-6">
-        {/* Back Button & Actions */}
-        <div className="flex justify-between items-center mb-8">
-          <Link
-            href="/#about"
-            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors group"
-          >
-            <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-            <span className="font-semibold">Back to Home</span>
-          </Link>
-        </div>
-
         {/* Resume Container */}
         <div className="max-w-6xl mx-auto bg-white dark:bg-gray-800 shadow-2xl print:shadow-none rounded-lg overflow-hidden">
           <div className="flex flex-col lg:flex-row min-h-[800px]">
@@ -278,7 +267,7 @@ export default function ResumePage() {
                         Database;
                       </p>
                     </div>
-                    <div className="text-right mt-2 md:mt-0">
+                    <div className="text-right mt-2 md:mt-0 text-sm">
                       <p className="text-gray-600 dark:text-gray-400 font-medium">
                         Sep 2020 – Sep 2024
                       </p>

@@ -180,49 +180,12 @@ export function injectPerformanceCSS() {
 // Performance monitoring component
 export function PerformanceMonitor() {
   useEffect(() => {
-    // Inject performance CSS
+    // Inject CSS that downgrades expensive effects on low-end devices.
     injectPerformanceCSS();
 
-    // Monitor Core Web Vitals
-    if (typeof window !== "undefined" && "PerformanceObserver" in window) {
-      // Monitor Largest Contentful Paint (LCP)
-      const lcpObserver = new PerformanceObserver((list) => {
-        for (const entry of list.getEntries()) {
-          if (entry.entryType === "largest-contentful-paint") {
-            console.log("LCP:", entry.startTime);
-            // You can send this data to analytics
-          }
-        }
-      });
-
-      try {
-        lcpObserver.observe({ entryTypes: ["largest-contentful-paint"] });
-      } catch (e) {
-        // Fallback for browsers that don't support this
-      }
-
-      // Monitor First Input Delay (FID)
-      const fidObserver = new PerformanceObserver((list) => {
-        for (const entry of list.getEntries()) {
-          if (entry.entryType === "first-input") {
-            const fidEntry = entry as any;
-            const fid = fidEntry.processingStart - fidEntry.startTime;
-            console.log("FID:", fid);
-          }
-        }
-      });
-
-      try {
-        fidObserver.observe({ entryTypes: ["first-input"] });
-      } catch (e) {
-        // Fallback for browsers that don't support this
-      }
-
-      return () => {
-        lcpObserver.disconnect();
-        fidObserver.disconnect();
-      };
-    }
+    // NOTE: The previous LCP/FID PerformanceObservers only console.log'd their
+    // values (stripped in production), so they did real work for no benefit.
+    // Removed. Wire up a real analytics sink here if metrics are needed.
   }, []);
 
   return null;

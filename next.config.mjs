@@ -11,7 +11,9 @@ const nextConfig = {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60,
+    // Cache optimized images for 31 days (was 60s, which forced frequent
+    // re-optimization on the server and re-downloads for clients).
+    minimumCacheTTL: 2678400,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     remotePatterns: [
@@ -69,6 +71,15 @@ const nextConfig = {
       },
       {
         source: "/cv.pdf",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=3600",
+          },
+        ],
+      },
+      {
+        source: "/Raihan_Oza_Samudera_Siregar_CV.pdf",
         headers: [
           {
             key: "Cache-Control",

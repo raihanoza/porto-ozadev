@@ -1,20 +1,14 @@
-import React, { memo } from "react";
+"use client";
+
+import { memo } from "react";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import {
-  coffeeIcon,
-  heroBgDarkBlur,
-  heroBgLightBlur,
-} from "@/public/image/optimized/image-imports";
-import bgDark from "@/public/image/HeroBg.webp";
-import bgLight from "@/public/image/HeroBgLight.webp";
-import { NeonGlowEffect } from "./TextEffect";
+import { coffeeIcon } from "@/public/image/optimized/image-imports";
 import dynamic from "next/dynamic";
-import ScrollBaseAnimation from "./text-marquee";
-import { BackgroundBeamsWithCollision } from "./shadcn-io/background-beams-with-collision";
+import { MapPin } from "lucide-react";
 import { Particles } from "./particles";
-import FuzzyText from "./shadcn-io/fuzzy-text";
+import FuzzyCode from "./FuzzyCode";
 
 // Lazy load heavy components
 const ProfileCard = dynamic(() => import("../ProfileCard"), {
@@ -56,30 +50,7 @@ function Hero() {
               <h2 className="text-primary font-bold lg:text-5xl md:text-2xl text-2xl">
                 Turning imagination into lines of{" "}
                 <span className="inline-block">
-                  <span className="lg:hidden md:inline-block inline-block">
-                    <FuzzyText
-                      fontSize={24}
-                      fontWeight={900}
-                      color="#7B91D1"
-                      enableHover={true}
-                      baseIntensity={0.18}
-                      hoverIntensity={0.01}
-                    >
-                      Code
-                    </FuzzyText>
-                  </span>
-                  <span className="hidden lg:inline-block">
-                    <FuzzyText
-                      fontSize={60}
-                      fontWeight={900}
-                      color="#7B91D1"
-                      enableHover={true}
-                      baseIntensity={0.18}
-                      hoverIntensity={0.5}
-                    >
-                      Code
-                    </FuzzyText>
-                  </span>
+                  <FuzzyCode />
                 </span>
                 ,<br />
                 <span className="text-lightpurple">C☕️ffee</span> into digital
@@ -137,18 +108,61 @@ function Hero() {
           </div>
         </div>
 
-        {/* Static text banner */}
-        <div
-          className="absolute bottom-0 w-full lg:h-[10%] h-[7%] bg-risd-alt-smooth-compat dark:bg-dark-risd-alt-smooth-compat flex items-center z-10"
-          aria-hidden="true"
-        >
-          <ScrollBaseAnimation
-            baseVelocity={3}
-            scrollDependent={true}
-            clasname="font-bold tracking-[-0.07em] leading-[70%]"
-          >
-            FRONT END DEVELOPER
-          </ScrollBaseAnimation>
+        {/* Status & stats banner */}
+        <div className="absolute bottom-0 w-full lg:h-[10%] py-2.5 lg:py-0 bg-risd-alt-smooth-compat dark:bg-dark-risd-alt-smooth-compat flex items-center z-10">
+          <div className="w-full">
+            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 md:gap-5 px-5 text-primary">
+              {/* Availability */}
+              <span className="flex items-center gap-2 whitespace-nowrap text-[11px] md:text-base font-medium">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75"></span>
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500"></span>
+                </span>
+                Available for <span className="font-bold">WORK</span> or any{" "}
+                <span className="font-bold">COLLABS</span>
+              </span>
+
+              <span
+                className="hidden md:block h-4 w-px bg-primary/25"
+                aria-hidden="true"
+              ></span>
+              <span className="whitespace-nowrap text-[11px] md:text-base font-semibold">
+                Full Stack Developer
+              </span>
+
+              <span
+                className="hidden md:block h-4 w-px bg-primary/25"
+                aria-hidden="true"
+              ></span>
+              <span className="whitespace-nowrap text-[11px] md:text-base">
+                <b className="font-bold">3+</b> Years
+              </span>
+
+              <span
+                className="hidden md:block h-4 w-px bg-primary/25"
+                aria-hidden="true"
+              ></span>
+              <span className="whitespace-nowrap text-[11px] md:text-base">
+                <b className="font-bold">10+</b> Projects
+              </span>
+
+              <span
+                className="hidden md:block h-4 w-px bg-primary/25"
+                aria-hidden="true"
+              ></span>
+              <span className="whitespace-nowrap text-[11px] md:text-base">
+                <b className="font-bold">100+</b> Users
+              </span>
+
+              <span
+                className="hidden md:block h-4 w-px bg-primary/25"
+                aria-hidden="true"
+              ></span>
+              <span className="flex items-center gap-1 whitespace-nowrap text-[11px] md:text-base">
+                <MapPin className="h-3.5 w-3.5" /> Medan, ID
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </section>

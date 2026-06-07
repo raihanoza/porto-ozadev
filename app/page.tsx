@@ -1,14 +1,17 @@
-"use client";
-
 import { StructuredData } from "@/components/structured-data";
-import About from "@/components/ui/About";
-import Contact from "@/components/ui/Contact";
-import Experience from "@/components/ui/Experience";
-import Footer from "@/components/ui/Footer";
-import Hero from "@/components/ui/Hero";
 import Navbar from "@/components/ui/Navbar";
-import Projects from "@/components/ui/Projects";
-import Skills from "@/components/ui/Skills";
+import Hero from "@/components/ui/Hero";
+import About from "@/components/ui/About";
+import dynamic from "next/dynamic";
+
+// Below-the-fold sections are code-split so their JS isn't part of the
+// initial bundle. SSR stays enabled (default) so content remains in the
+// HTML for SEO; only hydration JS is deferred/loaded on demand.
+const Skills = dynamic(() => import("@/components/ui/Skills"));
+const Experience = dynamic(() => import("@/components/ui/Experience"));
+const Projects = dynamic(() => import("@/components/ui/Projects"));
+const Contact = dynamic(() => import("@/components/ui/Contact"));
+const Footer = dynamic(() => import("@/components/ui/Footer"));
 
 export default function Home() {
   return (

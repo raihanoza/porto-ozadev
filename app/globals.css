@@ -21,14 +21,40 @@
 
 /* Optimize animations for mobile */
 @media (max-width: 768px) {
+  /* The rotating conic-gradient border forces a full repaint every frame,
+     which is very expensive on mobile GPUs. Keep the border static on mobile
+     (gradient still renders, it just stops rotating). */
   .animate-border {
-    animation-duration: 6s !important; /* Slower animation on mobile */
+    animation: none !important;
   }
 
   .animate-float-icon,
   .animate-twinkle,
   .animate-shooting-star {
     animation: none !important;
+  }
+
+  /* backdrop-filter (blur/saturate) is one of the heaviest paint ops on
+     mobile. Drop it on small screens; the solid background underneath stays.
+     Covers both direct utilities and pseudo-element variants (before:/after:). */
+  [class*="backdrop-blur"],
+  [class*="backdrop-saturate"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  [class*="backdrop-blur"]::before,
+  [class*="backdrop-blur"]::after,
+  [class*="backdrop-saturate"]::before,
+  [class*="backdrop-saturate"]::after {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+/* Pause the conic-gradient border animation while the tab is hidden */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-border {
+    animation-play-state: running;
   }
 }
 

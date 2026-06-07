@@ -123,6 +123,7 @@ const Projects = () => {
                             alt={`${project.title} preview 2`}
                             fill
                             loading="lazy"
+                            quality={70}
                             className="rounded-lg object-contain"
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 500px"
                           />
@@ -137,6 +138,7 @@ const Projects = () => {
                         alt={`${project.title} preview 1`}
                         fill
                         loading="lazy"
+                        quality={70}
                         className="rounded-lg object-contain"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 500px"
                       />

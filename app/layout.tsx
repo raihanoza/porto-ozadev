@@ -234,7 +234,11 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         <link rel="preload" href="/image/me2.png" as="image" type="image/png" />
-        <link rel="prefetch" href="/cv.pdf" as="document" />
+        <link
+          rel="prefetch"
+          href="/Raihan_Oza_Samudera_Siregar_CV.pdf"
+          as="document"
+        />
 
         {/* PWA and Mobile optimization */}
         <meta name="format-detection" content="telephone=no" />

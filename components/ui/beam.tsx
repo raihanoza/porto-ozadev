@@ -49,6 +49,10 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
 }) => {
   const id = useId();
   const [pathD, setPathD] = useState("");
+  // Animate the gradient only while the beams' container is on screen, and
+  // never on low-end devices (the moving SVG gradient repaints every frame).
+  const [shouldAnimate, setShouldAnimate] = useState(false);
+  const [isLowEnd, setIsLowEnd] = useState(false);
 
   const [svgDimensions, setSvgDimensions] = useState({ width: 0, height: 0 });
   const strokeDasharray = dotted ? `${dotSpacing} ${dotSpacing}` : "none";
@@ -95,33 +99,30 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
       }
     };
 
-    // Initialize ResizeObserver
+    // Recalculate the path whenever the container OR either endpoint resizes.
+    // This replaces the old perpetual setInterval(updatePath, 100) which forced
+    // a layout reflow 10x/second forever on every beam.
     const resizeObserver = new ResizeObserver(() => {
-      // For all entries, recalculate the path
       updatePath();
     });
 
-    // Observe the container element
-    if (containerRef.current) {
-      resizeObserver.observe(containerRef.current);
-    }
+    if (containerRef.current) resizeObserver.observe(containerRef.current);
+    if (fromRef.current) resizeObserver.observe(fromRef.current);
+    if (toRef.current) resizeObserver.observe(toRef.current);
 
-    // Call the updatePath initially and after animation completes
+    // Recalculate on window resize (covers reflows the observer may miss)
+    window.addEventListener("resize", updatePath);
+
+    // Initial path + a couple of bounded follow-ups to catch late layout/fonts
     updatePath();
+    const t1 = setTimeout(updatePath, 200);
+    const t2 = setTimeout(updatePath, 800);
 
-    // Add a timeout to recalculate after animation (700ms matches your animation duration)
-    const animationTimeout = setTimeout(() => {
-      updatePath();
-    }, 800);
-
-    // Also add an interval to keep updating for smooth transitions
-    const intervalId = setInterval(updatePath, 100);
-
-    // Clean up the observer on component unmount
     return () => {
       resizeObserver.disconnect();
-      clearTimeout(animationTimeout);
-      clearInterval(intervalId);
+      window.removeEventListener("resize", updatePath);
+      clearTimeout(t1);
+      clearTimeout(t2);
     };
   }, [
     containerRef,
@@ -133,6 +134,37 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
     endXOffset,
     endYOffset,
   ]);
+
+  // Detect low-end devices once on mount
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    const isMobile = window.innerWidth < 768;
+    const hardwareConcurrency = navigator.hardwareConcurrency || 4;
+    const deviceMemory = (navigator as any).deviceMemory || 4;
+    setIsLowEnd(
+      prefersReducedMotion ||
+        isMobile ||
+        hardwareConcurrency <= 4 ||
+        deviceMemory <= 4
+    );
+  }, []);
+
+  // Pause the gradient animation when the container is scrolled out of view
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => setShouldAnimate(entries[0]?.isIntersecting ?? false),
+      { threshold: 0 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [containerRef]);
+
+  // Static gradient on low-end devices; otherwise only when visible
+  const animateGradient = !isLowEnd && shouldAnimate;
 
   return (
     <svg
@@ -183,19 +215,27 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
             y1: "0%",
             y2: "0%",
           }}
-          animate={{
-            x1: gradientCoordinates.x1,
-            x2: gradientCoordinates.x2,
-            y1: gradientCoordinates.y1,
-            y2: gradientCoordinates.y2,
-          }}
-          transition={{
-            delay,
-            duration,
-            ease: [0.16, 1, 0.3, 1], // https://easings.net/#easeOutExpo
-            repeat: Infinity,
-            repeatDelay: 0,
-          }}
+          animate={
+            animateGradient
+              ? {
+                  x1: gradientCoordinates.x1,
+                  x2: gradientCoordinates.x2,
+                  y1: gradientCoordinates.y1,
+                  y2: gradientCoordinates.y2,
+                }
+              : { x1: "0%", x2: "100%", y1: "0%", y2: "0%" }
+          }
+          transition={
+            animateGradient
+              ? {
+                  delay,
+                  duration,
+                  ease: [0.16, 1, 0.3, 1], // https://easings.net/#easeOutExpo
+                  repeat: Infinity,
+                  repeatDelay: 0,
+                }
+              : { duration: 0 }
+          }
         >
           <stop stopColor={gradientStartColor} stopOpacity="0"></stop>
           <stop stopColor={gradientStartColor}></stop>

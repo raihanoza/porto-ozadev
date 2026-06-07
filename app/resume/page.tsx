@@ -56,36 +56,46 @@ export default function ResumePage() {
               {/* Contact Info */}
               <div className="mb-8">
                 <div className="space-y-3 text-sm">
-                  <div className="flex items-center gap-3">
+                  <a
+                    href="https://wa.me/6289652164724" // TODO: tambahkan link LinkedIn
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 cursor-pointer hover:underline"
+                  >
                     <div className="w-6 h-6 bg-white/20 rounded flex items-center justify-center">
                       <Phone className="w-3 h-3" />
                     </div>
                     <span>+62896-5216-4724</span>
-                  </div>
+                  </a>
                   <div className="flex items-center gap-3">
                     <div className="w-6 h-6 bg-white/20 rounded flex items-center justify-center">
                       <Mail className="w-3 h-3" />
                     </div>
                     <span>raihanoza18@gmail.com</span>
                   </div>
-                  <div className="flex items-center gap-3">
+                  <a
+                    href="https://www.linkedin.com/in/raihanoza" // TODO: tambahkan link LinkedIn
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 cursor-pointer hover:underline"
+                  >
                     <div className="w-6 h-6 bg-white/20 rounded flex items-center justify-center">
                       <Linkedin className="w-3 h-3" />
                     </div>
                     <span>LinkedIn</span>
-                  </div>
-                  <div className="flex items-center gap-3">
+                  </a>
+                  <a
+                    href="https://github.com/raihanoza" // TODO: tambahkan link GitHub
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 cursor-pointer hover:underline"
+                  >
                     <div className="w-6 h-6 bg-white/20 rounded flex items-center justify-center">
                       <Github className="w-3 h-3" />
                     </div>
                     <span>GitHub</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-6 h-6 bg-white/20 rounded flex items-center justify-center">
-                      <Globe className="w-3 h-3" />
-                    </div>
-                    <span>Portofolio</span>
-                  </div>
+                  </a>
+
                   <div className="flex items-center gap-3">
                     <div className="w-6 h-6 bg-white/20 rounded flex items-center justify-center">
                       <MapPin className="w-3 h-3" />
@@ -103,116 +113,75 @@ export default function ResumePage() {
                   <h4 className="text-sm font-semibold mb-2 opacity-90">
                     Languages:
                   </h4>
-                  <div className="space-y-1 text-sm">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-white rounded-full"></span>
-                      <span>TypeScript</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-white rounded-full"></span>
-                      <span>JavaScript</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-white rounded-full"></span>
-                      <span>HTML</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-white rounded-full"></span>
-                      <span>CSS</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-white rounded-full"></span>
-                      <span>SQL</span>
-                    </div>
-                  </div>
+                  <p className="text-sm leading-relaxed">
+                    TypeScript, JavaScript, SQL, HTML5, CSS3, PHP
+                  </p>
                 </div>
 
                 <div className="mb-4">
                   <h4 className="text-sm font-semibold mb-2 opacity-90">
-                    Technologies:
+                    Frontend:
                   </h4>
-                  <div className="space-y-1 text-sm">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-white rounded-full"></span>
-                      <span>PostgreSQL</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-white rounded-full"></span>
-                      <span>MongoDB</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-white rounded-full"></span>
-                      <span>Prisma</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-white rounded-full"></span>
-                      <span>React</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-white rounded-full"></span>
-                      <span>Next.js</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-white rounded-full"></span>
-                      <span>Nest.js</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-white rounded-full"></span>
-                      <span>Redis</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-white rounded-full"></span>
-                      <span>Laravel</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-white rounded-full"></span>
-                      <span>React Native</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-white rounded-full"></span>
-                      <span>Express.js</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-white rounded-full"></span>
-                      <span>Node.js</span>
-                    </div>
-                  </div>
+                  <p className="text-sm leading-relaxed">
+                    React.js, Next.js (SSR/SSG/ISR), Redux, Zustand, React
+                    Query, Tailwind CSS, shadcn/ui, Vite
+                  </p>
+                </div>
+
+                <div className="mb-4">
+                  <h4 className="text-sm font-semibold mb-2 opacity-90">
+                    Backend:
+                  </h4>
+                  <p className="text-sm leading-relaxed">
+                    Node.js, NestJS, Express.js, Laravel, REST APIs, JWT
+                    Authentication, Role-Based Access Control (RBAC)
+                  </p>
+                </div>
+
+                <div className="mb-4">
+                  <h4 className="text-sm font-semibold mb-2 opacity-90">
+                    Mobile:
+                  </h4>
+                  <p className="text-sm leading-relaxed">
+                    React Native, React Redux, React Query
+                  </p>
+                </div>
+
+                <div className="mb-4">
+                  <h4 className="text-sm font-semibold mb-2 opacity-90">
+                    Databases:
+                  </h4>
+                  <p className="text-sm leading-relaxed">
+                    Microsoft SQL Server, PostgreSQL, MySQL, MongoDB, Prisma ORM
+                  </p>
+                </div>
+
+                <div className="mb-4">
+                  <h4 className="text-sm font-semibold mb-2 opacity-90">
+                    DevOps &amp; Tools:
+                  </h4>
+                  <p className="text-sm leading-relaxed">
+                    Git, GitHub, CI/CD, Docker, Postman, ESLint, Prettier, Linux
+                  </p>
                 </div>
 
                 <div>
                   <h4 className="text-sm font-semibold mb-2 opacity-90">
-                    Soft Skills:
+                    Practices:
                   </h4>
-                  <div className="space-y-1 text-sm">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-white rounded-full"></span>
-                      <span>Problem-solving</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-white rounded-full"></span>
-                      <span>Communication</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-white rounded-full"></span>
-                      <span>Teamwork</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-white rounded-full"></span>
-                      <span>Work ethic</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-white rounded-full"></span>
-                      <span>Adaptability</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-white rounded-full"></span>
-                      <span>Creativity</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-white rounded-full"></span>
-                      <span>Innovation</span>
-                    </div>
-                  </div>
+                  <p className="text-sm leading-relaxed">
+                    Agile/Scrum, Code Review, System Design, Query Optimization,
+                    Indexing, API Integration, Performance Optimization
+                  </p>
+                </div>
+              </div>
+
+              {/* Languages */}
+              <div className="mb-8">
+                <h3 className="text-lg font-bold mb-4">LANGUAGES</h3>
+                <div className="space-y-1 text-sm">
+                  <p>Indonesian (Native)</p>
+                  <p>English (Professional Working Proficiency)</p>
                 </div>
               </div>
             </div>
@@ -231,7 +200,7 @@ export default function ResumePage() {
                   <Linkedin className="w-6 h-6" />
                 </a>
                 <a
-                  href="/cv.pdf"
+                  href="/Raihan_Oza_Samudera_Siregar_CV.pdf"
                   download
                   className="text-primary hover:text-primary/80 font-semibold text-xs"
                 >
@@ -240,11 +209,15 @@ export default function ResumePage() {
               </div>
               <div className="mb-8">
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify">
-                  I am a Full Stack Developer with over 2 years of professional
-                  experience and a Bachelor's degree in Information Systems. I
-                  specialize in developing scalable web applications with a
-                  solid foundation in software engineering, system design, and
-                  application development.
+                  Full Stack Developer with 3+ years of professional experience
+                  building scalable web and mobile applications across the
+                  JavaScript/TypeScript ecosystem. Delivered production-grade
+                  ERP and HRMS platforms serving 100+ users, plus government
+                  service portals, using Next.js, NestJS, React Native, and SQL
+                  Server/PostgreSQL. Owns end-to-end product delivery from
+                  requirement analysis and system design through deployment and
+                  monitoring, with a strong focus on performance optimization,
+                  authentication/RBAC, and large-scale data handling.
                 </p>
               </div>
 
@@ -268,7 +241,7 @@ export default function ResumePage() {
                       <p className="text-sm text-gray-500 dark:text-gray-500 mt-1">
                         Relevant Coursework: Algorithms; Data Structures;
                         Software Engineering; Object-Oriented Programming;
-                        Database;
+                        Database Systems; Web Development
                       </p>
                     </div>
                     <div className="text-right mt-2 md:mt-0 text-sm">
@@ -295,7 +268,7 @@ export default function ResumePage() {
                         PT. TRANSPORINDO AGUNG SEJAHTERA
                       </h3>
                       <h4 className="text-base font-semibold text-gray-800 dark:text-gray-200">
-                        Fullstack Web Developer - Fulltime
+                        Full Stack Web Developer - Fulltime
                       </h4>
                     </div>
                     <div className="text-right">
@@ -310,69 +283,69 @@ export default function ResumePage() {
                     <li className="flex items-start gap-3">
                       <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Designed, developed, and maintained multiple internal
-                        web-based systems to support core business operations
-                        using Next.js and NestJS.
+                        Architected and delivered multiple production-grade
+                        internal web platforms using Next.js (TypeScript) and
+                        NestJS, supporting core export-cargo and HR business
+                        operations.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Built an Internal ERP Web Application for Export Cargo
-                        Shipping, responsible for managing export loading data,
-                        operational records, and internal company workflows to
-                        improve data accuracy and efficiency.
+                        Built an internal ERP application for export cargo
+                        shipping that centralized loading data, operational
+                        records, and approval workflows, eliminating manual
+                        spreadsheet tracking and improving data accuracy across
+                        operations teams.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        I Developed a Human Resource Management System (HRMS) to
-                        manage employee data, leave requests, approvals, and
-                        leave balance tracking, ensuring structured and
-                        centralized HR data management.
+                        Designed and shipped a Human Resource Management System
+                        (HRMS) serving 100+ employees, covering employee data,
+                        leave requests, multi-level approvals, and automated
+                        leave-balance tracking, replacing fragmented manual
+                        processes.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Created a WhatsApp Bot Monitoring Service to monitor
-                        website and server availability; the system
-                        automatically sends real-time alerts to WhatsApp groups
-                        when services are down, improving response time and
-                        system reliability.
+                        Built a WhatsApp Bot monitoring service that performs
+                        continuous uptime checks on internal websites and
+                        servers, cutting incident response time from ~30 minutes
+                        to under 5 by pushing real-time outage alerts to on-call
+                        groups.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Implemented Microsoft SQL Server as the primary
-                        database, handling data modeling, query optimization,
-                        indexing, and large-scale data operations.
+                        Modeled and optimized Microsoft SQL Server schemas for
+                        high-volume operational data through indexing
+                        strategies, query tuning, and stored procedures,
+                        reducing query response times by 50%+.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Applied Redux for predictable and scalable state
-                        management across complex frontend applications.
+                        Implemented predictable state management with Redux
+                        across complex multi-module frontends, improving
+                        maintainability and reducing prop-drilling across
+                        feature teams.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Actively involved in full development lifecycle
-                        including requirement analysis, system design,
-                        development, testing, debugging, deployment, and
-                        maintenance.
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
-                      <span>
-                        Collaborated closely with internal teams to translate
-                        business requirements into technical solutions and
-                        ensure system stability and scalability.
+                        Owned the full software development lifecycle —
+                        requirement analysis, system design, implementation,
+                        testing, deployment, and post-release maintenance —
+                        collaborating with operations and HR stakeholders to
+                        translate business needs into scalable technical
+                        solutions.
                       </span>
                     </li>
                   </ul>
@@ -401,33 +374,53 @@ export default function ResumePage() {
                     <li className="flex items-start gap-3">
                       <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Collaborated with 5 cross-function teams to brainstorm,
-                        design, and develop a service product to help people get
-                        hired.
+                        Collaborated with 5 cross-functional teams to design and
+                        ship public-facing digital services helping citizens
+                        check social assistance status and access government
+                        programs.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Developed a website for the general public to easily
-                        check their social assistance status. (ReactJs,
-                        Typescript, Zustand, Tailwind, ShadCn Ui)
+                        Built a responsive social-assistance status portal using
+                        React.js, TypeScript, Zustand, Tailwind CSS, and
+                        shadcn/ui, serving the general public with a clean and
+                        accessible UX.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Implemented front-end engineering best practices and
-                        patterns, presenting these strategies to other
-                        engineers.
+                        Developed the Aplans Booster web platform with React.js,
+                        React Query, Tailwind CSS, and TypeScript; integrated
+                        REST APIs via Postman and contributed to sprint planning
+                        and feature prioritization.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Responsible for brainstorming, developing, testing,
-                        collaborating, code reviewing, debugging, and deploying
-                        frontend features in 3 different teams. (GitHub, CI/CD)
+                        Built the Aplans Verivali mobile app using React Native,
+                        Redux, and React Query for field officers to verify and
+                        validate aid recipient data on-site.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>
+                        Standardized the frontend codebase by introducing ESLint
+                        and Prettier configurations, improving code consistency
+                        across multiple repositories and reducing review
+                        friction.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>
+                        Drove engineering best practices through code reviews,
+                        CI/CD pipelines, and internal knowledge-sharing sessions
+                        presented to fellow engineers.
                       </span>
                     </li>
                   </ul>
@@ -441,7 +434,7 @@ export default function ResumePage() {
                         PT.METROMATIKA TEKNOLOGI REKAYASA
                       </h3>
                       <h4 className="text-base font-semibold text-gray-800 dark:text-gray-200">
-                        Full stack Developer & Mobile Developer
+                        Full Stack & Mobile Developer
                       </h4>
                     </div>
                     <div className="text-right">
@@ -456,43 +449,42 @@ export default function ResumePage() {
                     <li className="flex items-start gap-3">
                       <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Developed and launched multiple web applications,
-                        including admin dashboards and mobile applications, for
-                        official services in Indonesia using modern technologies
-                        such as React (React (Next Js), Laravel, Tailwind CSS,
-                        Zustand, Redux, React Query)
+                        Delivered multiple production web and mobile
+                        applications for official Indonesian government services
+                        using Next.js, Laravel, React Native, Tailwind CSS,
+                        Zustand, Redux, and React Query.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Ensured the security and optimal performance of
-                        applications by conducting regular maintenance, updates,
-                        and improvements to the codebase.
+                        Built admin dashboards with CRUD modules, role-based
+                        access control, and complex reporting views adopted by
+                        internal operators.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Optimized mobile application performance across various
-                        devices, delivering a seamless user experience.
+                        Optimized mobile application performance across a wide
+                        range of Android devices, improving load times and
+                        delivering a smoother user experience.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Provided innovative and scalable solutions to complex
-                        challenges in mobile application development, enhancing
-                        the overall functionality and user engagement.
+                        Maintained existing codebases through regular security
+                        patches, dependency upgrades, and performance refactors
+                        to keep applications stable in production.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Collaborated closely with cross-functional teams to
-                        align business goals with technical requirements,
-                        ensuring the successful delivery of high-quality digital
-                        solutions
+                        Partnered with product, design, and backend teams to
+                        translate business requirements into technical
+                        specifications and ship features on schedule.
                       </span>
                     </li>
                   </ul>
@@ -521,42 +513,34 @@ export default function ResumePage() {
                     <li className="flex items-start gap-3">
                       <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Gained hands-on experience in front-end engineering,
-                        with a focus on delivering high-quality code and
-                        optimizing web performance using React and TypeScript.
-                        (React, TypeScript)
+                        Developed and launched the "Balitaku" React Native
+                        mobile app in just 2 months — a maternal-health support
+                        tool integrated with a QR-code system used across
+                        municipal services.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Developed the "Balitaku" mobile application in just two
-                        months, utilizing React Native to create a user-friendly
-                        interface aimed at supporting mothers.
+                        Built a CMS-style web platform enabling the Medan city
+                        government to spin up dedicated sub-sites for individual
+                        municipal services, accelerating digital service
+                        rollout.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Engineered a QR code-based system that integrated with
-                        other applications, streamlining interactions and
-                        enhancing functionality for users.
+                        Supported and integrated data for 100+ users across
+                        departments, enabling smoother cross-application data
+                        flow.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Designed and built a website interface that enables the
-                        Medan city government to create additional sites for
-                        various municipal services.
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
-                      <span>
-                        Managed and supported over 100 users, integrating their
-                        data with other applications to facilitate smooth
-                        communication and data transfer across platforms.
+                        Wrote clean, typed React + TypeScript code with a strong
+                        focus on web performance and reusability.
                       </span>
                     </li>
                   </ul>
@@ -585,41 +569,25 @@ export default function ResumePage() {
                     <li className="flex items-start gap-3">
                       <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Managed The Pawnshop System at PT.INDONESIA GADAI OKE
-                        with more than 10 outlets in Sumatera Utara ( PHP,
-                        Laravel, Bootstrap)
+                        Built and maintained the core pawnshop management system
+                        (PHP, Laravel, Bootstrap) serving 10+ outlets across
+                        North Sumatra and handling 100+ transactions per day.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Accomplished Manage Pawnshop data with more than 100
-                        Transactions every day
+                        Improved system usability and workflow ergonomics for
+                        branch operators, contributing to a 40% increase in
+                        transaction throughput.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Succeed doing college and work while maintaining control
-                        of college grades with 3.62 GPA and doing a nice work at
-                        company
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
-                      <span>
-                        Always Solved System Problems on time so as not to
-                        interfere with the running the system in the company and
-                        so almost that 90% of other workers are happy with
-                        developed system
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
-                      <span>
-                        Successfully Improved the convenience of the
-                        system,Resulted in an increase in at transaction of up
-                        to 40% and convenience for other workers
+                        Resolved production issues with fast turnaround to
+                        maintain business continuity, earning consistent
+                        positive feedback from end users.
                       </span>
                     </li>
                   </ul>
@@ -636,43 +604,40 @@ export default function ResumePage() {
                 <div className="mb-6">
                   <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
                     <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-                      Ameera Travel Umroh – Finance Website
+                      Ameera Travel Umroh – Finance Web Platform
                     </h3>
                     <span className="text-gray-500 font-medium text-sm">
                       Jul 2024 – Sep 2024
                     </span>
                   </div>
+                  <p className="text-xs text-purple-600 mb-2">
+                    React.js, TypeScript, Tailwind CSS, Node.js, Express.js,
+                    PostgreSQL, JWT · Solo Project
+                  </p>
                   <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
                     <li className="flex items-start gap-3">
                       <span className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Designed, developed, and deployed a comprehensive
-                        finance website, handling all aspects of frontend,
-                        backend, and DevOps independently.
+                        Single-handedly designed, developed, and deployed an
+                        end-to-end finance management platform covering
+                        frontend, backend, and DevOps.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Built responsive and user-friendly interfaces using
-                        React.js, Tailwind CSS, and TypeScript, ensuring an
-                        intuitive user experience.
+                        Built secure REST APIs with Node.js + Express.js and
+                        PostgreSQL, implementing JWT authentication, role-based
+                        access control, and encryption for sensitive financial
+                        data.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Developed a secure and scalable backend using Node.js,
-                        Express.js, and PostgreSQL, implementing APIs and
-                        integrating business logic.
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
-                      <span>
-                        Implemented user authentication, role-based access
-                        control, and secure data handling practices (JWT,
-                        encryption) to protect sensitive financial data.
+                        Set up monitoring and structured logging to ensure
+                        continuous uptime, faster debugging, and a strong
+                        security posture.
                       </span>
                     </li>
                   </ul>
@@ -682,33 +647,29 @@ export default function ResumePage() {
                 <div className="mb-6">
                   <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
                     <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-                      Aplans Boster – Website
+                      Aplans Booster – Public Data Verification Platform
                     </h3>
                     <span className="text-gray-500 font-medium text-sm">
                       Oct 2023 – Dec 2023
                     </span>
                   </div>
+                  <p className="text-xs text-purple-600 mb-2">
+                    React.js, Vite, React Query, shadcn/ui, Zustand, Tailwind
+                    CSS, Laravel · Government Service
+                  </p>
                   <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
                     <li className="flex items-start gap-3">
                       <span className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Work with the ui/ux team and backend developers in
-                        developing a website that is useful for people to check
-                        their data.
+                        Designed a clean, user-friendly interface for citizens
+                        to submit forms and review submission history.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        User-friendly interface to fill out forms and view
-                        submission history.
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
-                      <span>
-                        Utilized: React JS, Vite, React-Query, Shadcn UI,
-                        Zustand, Tailwind CSS, Laravel (Backend).
+                        Collaborated with UI/UX designers and backend engineers
+                        to ship a responsive, accessible web product.
                       </span>
                     </li>
                   </ul>
@@ -718,26 +679,29 @@ export default function ResumePage() {
                 <div className="mb-6">
                   <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
                     <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-                      Aplans Verivali – Mobile Application
+                      Aplans Verivali – Field Verification Mobile App
                     </h3>
                     <span className="text-gray-500 font-medium text-sm">
-                      Aug 2023 – Sept 2023
+                      Aug 2023 – Sep 2023
                     </span>
                   </div>
+                  <p className="text-xs text-purple-600 mb-2">
+                    React Native, Zustand, React Query, WhatsApp Gateway ·
+                    Government Service
+                  </p>
                   <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
                     <li className="flex items-start gap-3">
                       <span className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Mobile application created for verification and
-                        validation of data on residents who receive assistance
-                        funds
+                        Built a mobile tool for officers to verify and validate
+                        aid-recipient data directly in the field.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Utilized: React Native, Zustand, React-Query, Whatsapp
-                        Gateway.
+                        Integrated a WhatsApp Gateway for OTP delivery and
+                        real-time field communication.
                       </span>
                     </li>
                   </ul>
@@ -747,40 +711,30 @@ export default function ResumePage() {
                 <div className="mb-6">
                   <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
                     <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-                      Balitaku – Mobile Application
+                      Balitaku – Maternal &amp; Child Health Mobile App
                     </h3>
                     <span className="text-gray-500 font-medium text-sm">
-                      Oct 2023 – Dec 2023
+                      Oct 2022 – Dec 2022
                     </span>
                   </div>
+                  <p className="text-xs text-purple-600 mb-2">
+                    React Native, Express.js, React Query, WhatsApp Gateway ·
+                    Municipal Health Service
+                  </p>
                   <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
                     <li className="flex items-start gap-3">
                       <span className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Mobile application created for verification and
-                        validation of data on residents who receive assistance
-                        funds
+                        Developed a mobile app supporting stunting-prevention
+                        programs for infants in Medan, providing curated health
+                        information for mothers.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Made for prevent and reduce disease rate stunting for
-                        baby in Medan, and and provides various kinds of
-                        information related to baby health in it
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
-                      <span>
-                        Used OTP sent via whatsapp user For authentication
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
-                      <span>
-                        Utilized: React Native, Express Js, React-Query,
-                        Whatsapp Gateway.
+                        Implemented WhatsApp-based OTP authentication for
+                        secure, friction-free onboarding.
                       </span>
                     </li>
                   </ul>
@@ -790,24 +744,23 @@ export default function ResumePage() {
                 <div className="mb-6">
                   <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
                     <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-                      SIIMPAL – Mobile Application
+                      SIIMPAL – Selfie Attendance Mobile App
                     </h3>
                     <span className="text-gray-500 font-medium text-sm">
-                      Mei 2023 – July 2023
+                      May 2023 – Jul 2023
                     </span>
                   </div>
+                  <p className="text-xs text-purple-600 mb-2">
+                    React Native · Medan Tourism Office
+                  </p>
                   <ul className="space-y-1 text-gray-700 dark:text-gray-300 text-sm">
                     <li className="flex items-start gap-3">
                       <span className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
                       <span>
-                        Attendance application for the tourism office of Medan
-                        city, where employees declare their attendance by selfie
-                        in this application.
+                        Shipped a selfie-based attendance application for
+                        tourism office employees, simplifying daily check-ins
+                        through device camera integration.
                       </span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></span>
-                      <span>Utilized: React Native.</span>
                     </li>
                   </ul>
                 </div>

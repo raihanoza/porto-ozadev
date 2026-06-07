@@ -150,9 +150,6 @@ function Hero() {
                 className="hidden md:block h-4 w-px bg-primary/25"
                 aria-hidden="true"
               ></span>
-              <span className="whitespace-nowrap text-[11px] md:text-base">
-                <b className="font-bold">100+</b> Users
-              </span>
 
               <span
                 className="hidden md:block h-4 w-px bg-primary/25"
